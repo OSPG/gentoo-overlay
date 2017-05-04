@@ -5,7 +5,7 @@ EAPI=6
 
 inherit cmake-utils
 
-DESCRIPTION="Very fast, header only, C++ logging library."
+DESCRIPTION="Simple, unix-style music player"
 HOMEPAGE="https://github.com/stkw0/cppplayer"
 
 if [[ ${PV} == *9999 ]]; then
