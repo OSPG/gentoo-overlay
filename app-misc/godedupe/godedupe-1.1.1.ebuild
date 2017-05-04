@@ -12,7 +12,7 @@ EGO_PN=github.com/ospg/${PN}
 if [[ ${PV} == *9999 ]]; then
 	inherit golang-vcs
 else
-	SRC_URI="https://github.com/ospg/godedupe/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/ospg/godedupe/archive/${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64"
 	inherit golang-vcs-snapshot
 fi
