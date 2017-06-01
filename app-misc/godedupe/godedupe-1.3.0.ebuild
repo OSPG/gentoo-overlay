@@ -20,9 +20,13 @@ fi
 inherit golang-build
 
 SLOT="0"
-IUSE="test"
+IUSE="test notify"
 
 DEPEND="dev-lang/go"
+
+RDEPEND="
+	notify? ( app-eselect/eselect-notify-send )
+"
 
 src_install() {
 	dobin godedupe
