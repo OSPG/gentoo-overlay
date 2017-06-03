@@ -20,12 +20,12 @@ fi
 inherit golang-build
 
 SLOT="0"
-IUSE="test notify"
+IUSE="test"
 
 DEPEND="dev-lang/go"
 
 RDEPEND="
-	notify? ( app-eselect/eselect-notify-send )
+	app-eselect/eselect-notify-send
 "
 
 src_install() {
