@@ -24,6 +24,7 @@ DEPEND="dev-libs/spdlog
 		media-libs/libsfml
 		dev-libs/boost
 		media-libs/taglib
-		media-sound/mpg123"
+		media-sound/mpg123
+		dev-cpp/yaml-cpp"
 
 RDEPEND="${DEPEND}"
