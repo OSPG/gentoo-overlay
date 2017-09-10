@@ -20,9 +20,9 @@ LICENSE="LGPL-3.0"
 SLOT="0"
 IUSE="test"
 
-DEPENDS="dev-libs/keystone"
+DEPEND="dev-libs/keystone"
 
-RDEPENDS="${DEPENDS}"
+RDEPEND="${DEPEND}"
 
 src_prepare() {
 	cd "${WORKDIR}/${P}/keystone"
