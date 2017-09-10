@@ -33,6 +33,7 @@ src_configure() {
 src_compile() {
 	cd "${WORKDIR}/${P}/keystone"
 	export R2PM_PLUGDIR="${D}/usr/lib/radare2/last/"
+	export R2PM_PREFIX="${D}/usr/share/radare2/last/prefix"
 	default
 }
 
