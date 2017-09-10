@@ -7,8 +7,8 @@ PYTHON_COMPAT=( python3_{4,5} )
 
 inherit distutils-r1
 
-DESCRIPTION="A library to support the benchmarking of functions, similar to unit-tests."
-HOMEPAGE="https://github.com/google/benchmark"
+DESCRIPTION="An RPC library and framework"
+HOMEPAGE="https://github.com/grpc/grpc"
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
