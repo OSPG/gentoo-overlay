@@ -3,7 +3,7 @@
 
 EAPI=6
 
-DESCRIPTION="Improved and modern fdupes alternative"
+DESCRIPTION="Script to help secure a computer system"
 HOMEPAGE="https://www.mumei.space/Pajaro_xdd/schopenhauer.py"
 LICENSE="Unlicense"
 
