@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit autotools 
+inherit autotools
 
 DESCRIPTION="Simple, unix-style music player"
 HOMEPAGE="https://github.com/antmicro/zynq-mkbootimage"
