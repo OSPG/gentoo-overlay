@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit cmake-utils
+inherit autotools 
 
 DESCRIPTION="Simple, unix-style music player"
 HOMEPAGE="https://github.com/antmicro/zynq-mkbootimage"
@@ -21,3 +21,7 @@ DEPEND="dev-libs/libpcre
 		dev-libs/libelf"
 
 RDEPEND=""
+
+src_install() {
+	dobin mkbootimage
+}
