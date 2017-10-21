@@ -13,7 +13,7 @@ LICENSE="MIT"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="!app-vim/neocomplcache"
+DEPEND="!!app-vim/neocomplcache"
 
 VIM_PLUGIN_HELPFILES="${PN}.txt"
 
