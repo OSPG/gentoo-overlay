@@ -18,7 +18,7 @@ SLOT="0"
 IUSE=""
 
 DEPEND="dev-libs/libpcre
-		dev-libs/libelf"
+		virtual/libelf"
 
 RDEPEND=""
 
