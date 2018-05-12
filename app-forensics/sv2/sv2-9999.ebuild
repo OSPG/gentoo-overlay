@@ -3,13 +3,19 @@
 
 EAPI=6
 
+PYTHON_COMPAT=( python3_{4,5,6} )
+
+inherit distutils-r1
+
 DESCRIPTION="Script to help secure a computer system"
-HOMEPAGE="https://www.mumei.space/Pajaro_xdd/schopenhauer.py"
+HOMEPAGE="https://github.com/OSPG/sv2"
 LICENSE="Unlicense"
 
 SLOT="0"
 IUSE=""
 
-RDEPEND="dev-python/pyyaml
-		 dev-python/psutil
-		 >=dev-python/python-iptables-0.12.0"
+if [[ ${PV} == *9999 ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/OSPG/sv2"
+fi
+
