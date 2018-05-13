@@ -14,6 +14,11 @@ LICENSE="Unlicense"
 SLOT="0"
 IUSE=""
 
+RDEPEND="
+	dev-python/python-iptables[${PYTHON_USEDEP}]
+	dev-python/psutil[${PYTHON_USEDEP}]
+"
+
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/OSPG/sv2"
