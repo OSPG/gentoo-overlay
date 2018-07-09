@@ -4,15 +4,15 @@
 EAPI=6
 
 DESCRIPTION="Improved and modern fdupes alternative"
-HOMEPAGE="https://github.com/ospg/godedupe"
+HOMEPAGE="https://github.com/OSPG/godedupe"
 LICENSE="MIT"
 
-EGO_PN=github.com/ospg/${PN}
+EGO_PN=github.com/OSPG/${PN}
 
 if [[ ${PV} == *9999 ]]; then
 	inherit golang-vcs
 else
-	SRC_URI="https://github.com/ospg/godedupe/archive/${PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/OSPG/godedupe/archive/${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64"
 	inherit golang-vcs-snapshot
 fi
