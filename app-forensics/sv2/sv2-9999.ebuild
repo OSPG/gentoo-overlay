@@ -18,6 +18,7 @@ RDEPEND="
 	dev-python/python-iptables[${PYTHON_USEDEP}]
 	dev-python/psutil[${PYTHON_USEDEP}]
 	dev-python/colorama[${PYTHON_USEDEP}]
+	dev-python/coloredlogs[${PYTHON_USEDEP}]
 "
 
 if [[ ${PV} == *9999 ]]; then
