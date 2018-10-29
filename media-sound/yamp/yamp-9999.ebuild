@@ -5,8 +5,8 @@ EAPI=6
 
 inherit cmake-utils
 
-DESCRIPTION="Simple, unix-style music player"
-HOMEPAGE="https://www.mumei.space/david/yamp"
+DESCRIPTION="Dumb music player"
+HOMEPAGE="https://github.com/stkw0/yamp"
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
@@ -20,7 +20,6 @@ LICENSE="Unlicense"
 SLOT="0"
 IUSE="test"
 
-# TODO: Add grpc
 DEPEND="dev-libs/spdlog
 		media-libs/libsfml
 		dev-libs/boost
@@ -29,5 +28,6 @@ DEPEND="dev-libs/spdlog
 		dev-libs/libfmt
 		dev-lang/go
 		dev-go/go-protobuf
-		dev-cpp/yaml-cpp"
+		dev-cpp/yaml-cpp
+		net-libs/grpc"
 
