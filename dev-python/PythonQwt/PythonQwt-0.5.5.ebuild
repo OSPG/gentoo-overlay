@@ -14,9 +14,7 @@ LICENSE="MIT"
 SLOT="0"
 IUSE=""
 
-RDEPEND="
-	
-"
+RDEPEND="dev-python/PyQt5[${PYTHON_USEDEP},svg]"
 
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.zip -> ${P}.zip"
 
