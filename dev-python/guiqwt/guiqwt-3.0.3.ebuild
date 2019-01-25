@@ -15,6 +15,7 @@ SLOT="0"
 IUSE=""
 
 RDEPEND="
+	dev-python/cython[${PYTHON_USEDEP}]
 	dev-python/guidata[${PYTHON_USEDEP}]
 "
 
