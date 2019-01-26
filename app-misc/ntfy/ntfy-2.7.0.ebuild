@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -9,22 +9,6 @@ inherit distutils-r1
 
 DESCRIPTION="A utility for sending notifications, on demand and when commands finish."
 HOMEPAGE="https://github.com/dschep/ntfy"
-LICENSE="GPL-3.0"
-
-SLOT="0"
-IUSE="test telegram"
-
-RDEPEND="
-	dev-python/requests[${PYTHON_USEDEP}]
-	dev-python/ruamel-yaml[${PYTHON_USEDEP}]
-	dev-python/appdirs[${PYTHON_USEDEP}]
-
-	virtual/notification-daemon
-
-	telegram? (
-		app-misc/telegram-send[${PYTHON_USEDEP}]
-	)
-"
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
@@ -35,6 +19,34 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-#python_test() {
-	#tox -v || die
-#}
+LICENSE="GPL-3"
+SLOT="0"
+IUSE="test telegram dbus"
+
+RDEPEND="
+	dev-python/appdirs[${PYTHON_USEDEP}]
+	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/ruamel-yaml[${PYTHON_USEDEP}]
+
+	dbus? (
+		dev-python/dbus-python[${PYTHON_USEDEP}]
+		virtual/notification-daemon
+	)
+
+	telegram? (
+		app-misc/telegram-send[${PYTHON_USEDEP}]
+	)
+"
+
+DEPEND="${RDEPEND}
+	test? (
+		dev-python/emoji[${PYTHON_USEDEP}]
+		dev-python/mock[${PYTHON_USEDEP}]
+		dev-python/psutil[${PYTHON_USEDEP}]
+		dev-python/sleekxmpp[${PYTHON_USEDEP}]
+	)
+"
+
+python_test() {
+	py.test -vvv tests/test_* || die
+}
