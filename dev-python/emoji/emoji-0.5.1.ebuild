@@ -9,17 +9,6 @@ inherit distutils-r1
 
 DESCRIPTION="emoji terminal output for Python"
 HOMEPAGE="https://github.com/carpedm20/emoji"
-LICENSE="BSD"
-
-SLOT="0"
-IUSE="test"
-
-DEPEND="
-	test? (
-		dev-python/nose[${PYTHON_USEDEP}]
-	)
-"
-
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
@@ -29,6 +18,17 @@ else
 
 	KEYWORDS="~amd64 ~x86"
 fi
+
+
+LICENSE="BSD"
+SLOT="0"
+IUSE="test"
+
+DEPEND="
+	test? (
+		dev-python/nose[${PYTHON_USEDEP}]
+	)
+"
 
 python_test() {
 	py.test -vvv tests/test_* || die
