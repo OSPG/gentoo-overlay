@@ -9,19 +9,6 @@ inherit distutils-r1
 
 DESCRIPTION="Send messages and files over Telegram from the command-line."
 HOMEPAGE="https://www.rahielkasim.com/telegram-send/"
-LICENSE="GPL-3.0"
-
-SLOT="0"
-IUSE="test"
-
-RDEPEND="
-	dev-python/colorama[${PYTHON_USEDEP}]
-	dev-python/cryptography[${PYTHON_USEDEP}]
-	dev-python/appdirs[${PYTHON_USEDEP}]
-	dev-python/future[${PYTHON_USEDEP}]
-	dev-python/python-telegram-bot[${PYTHON_USEDEP}]
-"
-
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="$HOMEPAGE"
@@ -30,3 +17,16 @@ else
 
 	KEYWORDS="~amd64 ~x86"
 fi
+
+LICENSE="GPL-3"
+SLOT="0"
+IUSE="test"
+
+RDEPEND="
+	dev-python/appdirs[${PYTHON_USEDEP}]
+	dev-python/colorama[${PYTHON_USEDEP}]
+	dev-python/cryptography[${PYTHON_USEDEP}]
+	dev-python/future[${PYTHON_USEDEP}]
+	dev-python/python-telegram-bot[${PYTHON_USEDEP}]
+"
+
