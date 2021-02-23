@@ -10,6 +10,7 @@ KEYWORDS="~amd64"
 
 DEPEND="
 	net-misc/keychain
+	sys-apps/exa
 "
 RDEPEND="${DEPEND}"
 
