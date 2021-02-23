@@ -11,6 +11,7 @@ KEYWORDS="~amd64"
 DEPEND="
 	net-misc/keychain
 	sys-apps/exa
+	x11-terms/alacritty
 "
 RDEPEND="${DEPEND}"
 
@@ -19,4 +20,9 @@ S="${FILESDIR}"
 src_install() {
 	insinto /etc/zsh
 	doins "${FILESDIR}/zsh/"*
+
+	for i in /home/*; do
+		insinto "$i/.config/alacritty"
+		doins "${FILESDIR}/alacritty.yml"
+	done
 }
