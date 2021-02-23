@@ -9,6 +9,11 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 DEPEND="
+	app-editors/vim
+	app-shells/zsh
+	app-shells/zsh-completions
+	kde-misc/kdeconnect
+	kde-misc/kio-gdrivei
 	net-misc/keychain
 	sys-apps/exa
 	x11-terms/alacritty
