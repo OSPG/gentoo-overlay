@@ -13,7 +13,7 @@ DEPEND="
 	app-shells/zsh
 	app-shells/zsh-completions
 	kde-misc/kdeconnect
-	kde-misc/kio-gdrivei
+	kde-misc/kio-gdrive
 	net-misc/keychain
 	sys-apps/exa
 	x11-terms/alacritty
