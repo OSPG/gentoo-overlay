@@ -12,6 +12,7 @@ DEPEND="
 	app-editors/vim
 	app-shells/zsh
 	app-shells/zsh-completions
+	net-dns/dnscrypt-proxy
 	kde-misc/kdeconnect
 	kde-misc/kio-gdrive
 	net-misc/keychain
@@ -30,4 +31,9 @@ src_install() {
 		insinto "$i/.config/alacritty"
 		doins "${FILESDIR}/alacritty.yml"
 	done
+}
+
+pkg_config() {
+	rc-update add dnscrypt-proxy default
+	rc-service dnscrypt-proxy start
 }
