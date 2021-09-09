@@ -99,7 +99,7 @@ install_tool() {
 }
 
 src_install() {
-	echo -e "#!/bin/sh\npython /usr/share/${PN}/tools/idf.py \"$@\"" > idf
+	echo -e "#!/bin/sh\npython /usr/share/${PN}/tools/idf.py \"\$@\"" > idf
 	dobin idf
 
 	install_tool xtensa-esp32-elf
