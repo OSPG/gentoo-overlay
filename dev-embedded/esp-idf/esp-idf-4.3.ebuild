@@ -27,6 +27,7 @@ S="${WORKDIR}/${PN}-v${PV}"
 
 KEYWORDS="~amd64"
 LICENSE="Apache-2.0"
+IUSE="+esp32 esp32s2 esp32s3 riscv32"
 SLOT="0"
 
 RDEPEND="
@@ -46,7 +47,7 @@ RDEPEND="
 
 RESTRICT="strip"
 
-QA_PREBUILT="opt/* usr/lib*"
+QA_PREBUILT="opt/* usr/lib* usr/share/esp-idf/*"
 QA_PRESTRIPPED="opt/*"
 
 install_tool() {
@@ -102,11 +103,22 @@ src_install() {
 	echo -e "#!/bin/sh\npython /usr/share/${PN}/tools/idf.py \"\$@\"" > idf
 	dobin idf
 
-	install_tool xtensa-esp32-elf
-	install_tool xtensa-esp32-elf/xtensa-esp32-elf
-	install_tool xtensa-esp32s2-elf
-	install_tool xtensa-esp32s3-elf
-	install_tool riscv32-esp-elf
+	if use esp32; then
+		install_tool xtensa-esp32-elf
+		install_tool xtensa-esp32-elf/xtensa-esp32-elf
+	fi
+
+	if use esp32s2; then
+		install_tool xtensa-esp32s2-elf
+	fi
+
+	if use esp32s3; then	
+		install_tool xtensa-esp32s3-elf
+	fi
+
+	if use riscv32; then
+		install_tool riscv32-esp-elf
+	fi
 	install_tool esp32ulp-elf-binutils
 	install_tool openocd-esp32
 
