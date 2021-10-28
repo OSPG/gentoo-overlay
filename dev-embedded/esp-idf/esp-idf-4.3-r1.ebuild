@@ -87,6 +87,11 @@ install_tool() {
 		insinto /opt/${1}
 		doins -r include
 	fi
+	
+	if [[ -d "share" ]]; then
+		insinto /opt/${1}
+		doins -r share 
+	fi
 	)
 
 	(
