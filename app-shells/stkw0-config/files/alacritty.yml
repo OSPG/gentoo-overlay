@@ -42,6 +42,9 @@ window:
 
   # When true, alacritty starts maximized.
   start_mode: maximized
+  
+  # Background opacity
+  opacity: 0.94
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -216,9 +219,6 @@ colors:
 bell:
   animation: EaseOutExpo
   duration: 0
-
-# Background opacity
-background_opacity: 0.94
 
 # Mouse bindings
 #
