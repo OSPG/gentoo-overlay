@@ -6,22 +6,22 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{8,9} )
 
-VER="esp-2020r3"
+VER="esp-2021r2"
 CROSSTOOL_URL="https://github.com/espressif/crosstool-NG/releases/download/${VER}"
 
 inherit python-r1
 
 DESCRIPTION="Espressif IoT Development Framework"
 HOMEPAGE="https://www.espressif.com/"
-SRC_URI="https://dl.espressif.com/dl/esp-idf/releases/esp-idf-v${PV}.zip -> ${P}.zip
+SRC_URI="https://dl.espressif.com/github_assets/espressif/${PN}/releases/download/v${PV}/${PN}-v${PV}.zip -> ${P}.zip
 	https://github.com/espressif/binutils-esp32ulp/releases/download/v2.28.51-esp-20191205/binutils-esp32ulp-linux-amd64-2.28.51-esp-20191205.tar.gz
-	https://github.com/espressif/openocd-esp32/releases/download/v0.10.0-esp32-20210721/openocd-esp32-linux64-0.10.0-esp32-20210721.tar.gz
+	https://github.com/espressif/openocd-esp32/releases/download/v0.11.0-esp32-20211220/openocd-esp32-linux-amd64-0.11.0-esp32-20211220.tar.gz
 	${CROSSTOOL_URL}/xtensa-esp32-elf-gcc8_4_0-${VER}-linux-amd64.tar.gz
 	${CROSSTOOL_URL}/xtensa-esp32s2-elf-gcc8_4_0-${VER}-linux-amd64.tar.gz
 	${CROSSTOOL_URL}/xtensa-esp32s3-elf-gcc8_4_0-${VER}-linux-amd64.tar.gz
-	https://dl.espressif.com/dl/toolchains/preview/riscv32-esp-elf-gcc8_4_0-crosstool-ng-1.24.0-123-g64eb9ff-linux-amd64.tar.gz
+	${CROSSTOOL_URL}/riscv32-esp-elf-gcc8_4_0-${VER}-linux-amd64.tar.gz
 "
-#${CROSSTOOL_URL}/riscv32-esp-elf-gcc8_4_0-${VER}-linux-amd64.tar.gz
+	#https://dl.espressif.com/dl/toolchains/preview/riscv32-esp-elf-gcc8_4_0-crosstool-ng-1.24.0-123-g64eb9ff-linux-amd64.tar.gz
 
 S="${WORKDIR}/${PN}-v${PV}"
 
