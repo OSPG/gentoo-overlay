@@ -5,8 +5,8 @@ EAPI=7
 
 inherit cmake-utils
 
-DESCRIPTION="Frame library"
-HOMEPAGE="https://git.ligo.org/virgo/virgoapp/Fr"
+DESCRIPTION="Frame vector processing library"
+HOMEPAGE="https://git.ligo.org/virgo/virgoapp/Frv"
 
 MY_VER="v$(ver_rs 1 r 2 p)"
 
