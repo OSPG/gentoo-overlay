@@ -22,6 +22,7 @@ DEPEND="
 	kde-misc/kdeconnect
 	kde-misc/kio-gdrive
 	kde-misc/plasma-pass
+	media-fonts/kochi-substitute
 	net-dns/dnscrypt-proxy
 	net-misc/chrony
 	net-misc/keychain
