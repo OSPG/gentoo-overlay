@@ -1,7 +1,7 @@
-# Copyright 2021 Gentoo Authors
+# Copyright 2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="My configuration"
 
@@ -38,12 +38,18 @@ src_install() {
 	insinto /etc/zsh
 	doins "${FILESDIR}/zsh/"*
 
+	insinto /etc/portage
+	doins "${FILESDIR}/binrepos.conf"
+
 	for i in /home/*; do
 		insinto "$i/.config/alacritty"
 		doins "${FILESDIR}/alacritty.yml"
 		
 		insinto "$i/.gnupg"
 		doins "${FILESDIR}/gpg-agent.conf"
+
+		insinto "$i/.config/git"
+		doins "${FILESDIR}/ignore"
 	done
 }
 
