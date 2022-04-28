@@ -1,4 +1,4 @@
-# build folder
+
 build/
 #eclipse project files
 .cproject
@@ -20,6 +20,9 @@ build/
 
 # Fortran module files
 *.mod
+
+# Allow golang mod file
+!go.mod
 
 # Compiled Static libraries
 *.lai
