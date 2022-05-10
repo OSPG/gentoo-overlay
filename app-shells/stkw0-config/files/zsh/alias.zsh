@@ -21,5 +21,5 @@ alias cdwl="cd ~/Develop/Work/linda"   # Development things of work
 alias cdwd="cd ~/Develop/Work/DESI"
 alias cdwdy="cd ~/Develop/Work/DESI/gfayocto"
 alias cdwds="cd ~/Develop/Work/DESI/gfaserver"
+alias cdwv="cd ~/Develop/Work/Virgo"
 alias cde="cd ~/Documents/Apuntes" 
-alias cdu="cd ~/Documents/UNI/2018-2019"
