@@ -5,12 +5,13 @@ autoload colors
 colors
 
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git
 #zstyle ':vcs_info:git*' actionformats "%s  %r/%S %b %m%u%c "
-zstyle ':vcs_info:git*' formats "- %{$fg[green]%}[%b]%{$reset_color%}"
-precmd() {
+precmd_vcs_info() {
     vcs_info
 }
+precmd_functions+=( precmd_vcs_info )
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' formats "- %{$fg[green]%}[%b]%{$reset_color%}"
 
 local current_dir='%{$fg[cyan]%}%3c%{$reset_color%}'
 local return_code="%(?..%{$fg[red]%}%? ⚑%{$reset_color%}) $(echo -ne "\0")"
