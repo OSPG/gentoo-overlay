@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="Frame vector processing library"
 HOMEPAGE="https://git.ligo.org/virgo/virgoapp/Frv"

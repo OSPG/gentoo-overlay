@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="Frame library"
 HOMEPAGE="https://git.ligo.org/virgo/virgoapp/Fr"
