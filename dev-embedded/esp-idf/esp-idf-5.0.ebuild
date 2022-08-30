@@ -52,7 +52,7 @@ RDEPEND="
 	dev-python/future[${PYTHON_USEDEP}]
 	dev-python/kconfiglib[${PYTHON_USEDEP}]
 	dev-python/pyelftools[${PYTHON_USEDEP}]
-	dev-python/pyparsing0[${PYTHON_USEDEP}]
+	dev-python/pyparsing[${PYTHON_USEDEP}]
 	dev-python/pyserial[${PYTHON_USEDEP}]
 	dev-python/python-socketio[${PYTHON_USEDEP}]
 	dev-python/reedsolomon[${PYTHON_USEDEP}]
