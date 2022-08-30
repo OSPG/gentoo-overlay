@@ -1,0 +1,34 @@
+diff --git a/tools/idf.py b/tools/idf.py
+index 2a705e556d..9d27fb5f08 100755
+--- a/tools/idf.py
++++ b/tools/idf.py
+@@ -35,15 +35,9 @@ sys.dont_write_bytecode = True
+ 
+ import python_version_checker  # noqa: E402
+ 
+-try:
+-    from idf_py_actions.errors import FatalError  # noqa: E402
+-    from idf_py_actions.tools import (PropertyDict, executable_exists, get_target, idf_version,  # noqa: E402
++from idf_py_actions.errors import FatalError  # noqa: E402
++from idf_py_actions.tools import (PropertyDict, executable_exists, get_target, idf_version,  # noqa: E402
+                                       merge_action_lists, realpath)
+-except ImportError:
+-    # For example, importing click could cause this.
+-    print('Please use idf.py only in an ESP-IDF shell environment.', file=sys.stderr)
+-    sys.exit(1)
+-
+ # Use this Python interpreter for any subprocesses we launch
+ PYTHON = sys.executable
+ 
+diff --git a/tools/idf_tools.py b/tools/idf_tools.py
+index 13073e3e48..02f9cc7b7f 100755
+--- a/tools/idf_tools.py
++++ b/tools/idf_tools.py
+@@ -2027,6 +2027,7 @@ def action_install_python_env(args):  # type: ignore
+ 
+ 
+ def action_check_python_dependencies(args):  # type: ignore
++    return
+     use_constraints = not args.no_constraints
+     req_paths = get_requirements('')  # no new features -> just detect the existing ones
+ 
