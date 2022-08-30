@@ -55,6 +55,7 @@ RDEPEND="
 	dev-python/pyparsing[${PYTHON_USEDEP}]
 	dev-python/pyserial[${PYTHON_USEDEP}]
 	dev-python/python-socketio[${PYTHON_USEDEP}]
+	dev-python/pyyaml[${PYTHON_USEDEP}]
 	dev-python/reedsolomon[${PYTHON_USEDEP}]
 	dev-embedded/esptool[${PYTHON_USEDEP}]
 	dev-embedded/idf-component-manager[${PYTHON_USEDEP}]
