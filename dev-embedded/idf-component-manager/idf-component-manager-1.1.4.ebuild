@@ -19,5 +19,6 @@ KEYWORDS="~amd64 ~x86"
 RDEPEND="
 	dev-python/requests-toolbelt[${PYTHON_USEDEP}]
 	dev-python/schema[${PYTHON_USEDEP}]
+	dev-python/tqdm[${PYTHON_USEDEP}]
 "
 
