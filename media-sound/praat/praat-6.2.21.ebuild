@@ -34,5 +34,8 @@ src_prepare() {
 		ewarn "No audio provided. Building silent praat"
 		cp makefiles/makefile.defs.linux.silent ./makefile.defs
 	fi
+
+	printf 'INSTALL = install -p praat %s' "${S}/bin" | tee -a ./makefile.defs
 }
+
 
