@@ -6,7 +6,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{8,9,10} )
 
-VER="esp-2022r1-RC1"
+VER="esp-2022r1"
 CROSSTOOL_URL="https://github.com/espressif/crosstool-NG/releases/download/${VER}"
 
 inherit python-r1
@@ -17,10 +17,10 @@ HOMEPAGE="https://www.espressif.com/"
 if [[ ${PV} == *5.0 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/espressif/esp-idf.git"
-	EGIT_COMMIT="v5.0-beta1"
+	EGIT_COMMIT="v5.0-rc1"
 	
 	SRC_URI="https://github.com/espressif/binutils-esp32ulp/releases/download/v2.28.51-esp-20191205/binutils-esp32ulp-linux-amd64-2.28.51-esp-20191205.tar.gz
-		https://github.com/espressif/openocd-esp32/releases/download/v0.11.0-esp32-20211220/openocd-esp32-linux-amd64-0.11.0-esp32-20211220.tar.gz
+		https://github.com/espressif/openocd-esp32/releases/download/v0.11.0-esp32-20220706/openocd-esp32-linux-amd64-0.11.0-esp32-20220706.tar.gz
 		${CROSSTOOL_URL}/xtensa-esp32-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
 		${CROSSTOOL_URL}/xtensa-esp32s2-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
 		${CROSSTOOL_URL}/xtensa-esp32s3-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
