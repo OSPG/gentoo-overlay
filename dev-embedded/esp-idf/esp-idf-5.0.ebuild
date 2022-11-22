@@ -3,7 +3,6 @@
 
 EAPI=8
 
-
 PYTHON_COMPAT=( python3_{8,9,10} )
 
 VER="esp-2022r1"
@@ -14,31 +13,17 @@ inherit python-r1
 DESCRIPTION="Espressif IoT Development Framework"
 HOMEPAGE="https://www.espressif.com/"
 
-if [[ ${PV} == *5.0 ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/espressif/esp-idf.git"
-	EGIT_COMMIT="v5.0-rc1"
-	
-	SRC_URI="https://github.com/espressif/binutils-esp32ulp/releases/download/v2.28.51-esp-20191205/binutils-esp32ulp-linux-amd64-2.28.51-esp-20191205.tar.gz
-		https://github.com/espressif/openocd-esp32/releases/download/v0.11.0-esp32-20220706/openocd-esp32-linux-amd64-0.11.0-esp32-20220706.tar.gz
-		${CROSSTOOL_URL}/xtensa-esp32-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
-		${CROSSTOOL_URL}/xtensa-esp32s2-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
-		${CROSSTOOL_URL}/xtensa-esp32s3-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
-		${CROSSTOOL_URL}/riscv32-esp-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
-	"
-else 
-	SRC_URI="https://dl.espressif.com/github_assets/espressif/${PN}/releases/download/v${PV}/${PN}-v${PV}.zip -> ${P}.zip
-		https://github.com/espressif/binutils-esp32ulp/releases/download/v2.28.51-esp-20191205/binutils-esp32ulp-linux-amd64-2.28.51-esp-20191205.tar.gz
-		https://github.com/espressif/openocd-esp32/releases/download/v0.11.0-esp32-20211220/openocd-esp32-linux-amd64-0.11.0-esp32-20211220.tar.gz
-		${CROSSTOOL_URL}/xtensa-esp32-elf-gcc8_4_0-${VER}-linux-amd64.tar.gz
-		${CROSSTOOL_URL}/xtensa-esp32s2-elf-gcc8_4_0-${VER}-linux-amd64.tar.gz
-		${CROSSTOOL_URL}/xtensa-esp32s3-elf-gcc8_4_0-${VER}-linux-amd64.tar.gz
-		${CROSSTOOL_URL}/riscv32-esp-elf-gcc8_4_0-${VER}-linux-amd64.tar.gz
-	"
-	#https://dl.espressif.com/dl/toolchains/preview/riscv32-esp-elf-gcc8_4_0-crosstool-ng-1.24.0-123-g64eb9ff-linux-amd64.tar.gz
+SRC_URI="https://github.com/espressif/${PN}/releases/download/v${PV}-rc1/${PN}-v${PV}-rc1.zip -> ${P}.zip
+	https://github.com/espressif/binutils-esp32ulp/releases/download/v2.28.51-esp-20191205/binutils-esp32ulp-linux-amd64-2.28.51-esp-20191205.tar.gz
+	https://github.com/espressif/openocd-esp32/releases/download/v0.11.0-esp32-20220706/openocd-esp32-linux-amd64-0.11.0-esp32-20220706.tar.gz
+	${CROSSTOOL_URL}/xtensa-esp32-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
+	${CROSSTOOL_URL}/xtensa-esp32s2-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
+	${CROSSTOOL_URL}/xtensa-esp32s3-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
+	${CROSSTOOL_URL}/riscv32-esp-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
+"
+#https://dl.espressif.com/dl/toolchains/preview/riscv32-esp-elf-gcc8_4_0-crosstool-ng-1.24.0-123-g64eb9ff-linux-amd64.tar.gz
 
-	KEYWORDS="~amd64"
-fi
+KEYWORDS="~amd64"
 
 LICENSE="Apache-2.0"
 IUSE="+esp32 esp32s2 esp32s3 riscv32"
@@ -68,10 +53,7 @@ QA_PRESTRIPPED="opt/*"
 
 PATCHES=("${FILESDIR}/allow-system-install-${P}.patch")
 
-src_unpack() {
-	unpack ${A} || die
-	git-r3_src_unpack
-}
+S="${WORKDIR}/${PN}-v${PV}-rc1"
 
 install_tool() {
 	shopt -s globstar
