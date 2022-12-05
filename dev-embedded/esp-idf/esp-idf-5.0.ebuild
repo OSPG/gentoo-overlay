@@ -13,9 +13,9 @@ inherit python-r1
 DESCRIPTION="Espressif IoT Development Framework"
 HOMEPAGE="https://www.espressif.com/"
 
-SRC_URI="https://github.com/espressif/${PN}/releases/download/v${PV}-rc1/${PN}-v${PV}-rc1.zip -> ${P}.zip
-	https://github.com/espressif/binutils-esp32ulp/releases/download/v2.28.51-esp-20191205/binutils-esp32ulp-linux-amd64-2.28.51-esp-20191205.tar.gz
-	https://github.com/espressif/openocd-esp32/releases/download/v0.11.0-esp32-20220706/openocd-esp32-linux-amd64-0.11.0-esp32-20220706.tar.gz
+#	https://github.com/espressif/binutils-esp32ulp/releases/download/v2.28.51-esp-20191205/binutils-esp32ulp-linux-amd64-2.28.51-esp-20191205.tar.gz
+SRC_URI="https://dl.espressif.com/github_assets/espressif/${PN}/releases/download/v${PN}/${PN}-v${PV}.zip -> ${P}.zip
+	https://github.com/espressif/openocd-esp32/releases/download/v0.11.0-esp32-20221026/openocd-esp32-linux-amd64-0.11.0-esp32-20221026.tar.gz
 	${CROSSTOOL_URL}/xtensa-esp32-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
 	${CROSSTOOL_URL}/xtensa-esp32s2-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
 	${CROSSTOOL_URL}/xtensa-esp32s3-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
@@ -129,7 +129,6 @@ src_install() {
 	if use riscv32; then
 		install_tool riscv32-esp-elf
 	fi
-	install_tool esp32ulp-elf-binutils
 	install_tool openocd-esp32
 
 	echo "IDF_PATH=/usr/share/${PN}" > 99esp-idf || die
