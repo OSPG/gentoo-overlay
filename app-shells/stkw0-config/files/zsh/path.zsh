@@ -12,6 +12,6 @@ PATH+=":/home/david/Soft/Projects/helper_scripts"
 
 export PATH
 
-LD_LIBRARY_PATH+=":/usr/local/lib"
+LD_LIBRARY_PATH+=":/usr/local/lib64:/usr/local/lib"
 
 export LD_LIBRARY_PATH
