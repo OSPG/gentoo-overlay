@@ -47,3 +47,7 @@ zstyle '*' single-ignored show
 precmd() {
    echo -ne "\a"
 }
+
+function gr() {
+   git -C "$1" rev-parse --show-toplevel
+}
