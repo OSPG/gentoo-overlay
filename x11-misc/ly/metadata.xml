@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>rolferen@gmail.com</email>
+		<name>Mazunki Hoksaas</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">nullgemm/ly</remote-id>
+	</upstream>
+	<use>
+		<flag name="openrc">Install service files for openrc</flag>
+		<flag name="runit">Install service files for runit</flag>
+	</use>
+</pkgmetadata>
