@@ -6,6 +6,7 @@ EAPI=8
 PYTHON_COMPAT=( python3_{9..11} )
 
 VER="esp-2022r1"
+
 CROSSTOOL_URL="https://github.com/espressif/crosstool-NG/releases/download/${VER}"
 
 inherit python-single-r1
@@ -16,6 +17,7 @@ HOMEPAGE="https://www.espressif.com/"
 #	https://github.com/espressif/binutils-esp32ulp/releases/download/v2.28.51-esp-20191205/binutils-esp32ulp-linux-amd64-2.28.51-esp-20191205.tar.gz
 SRC_URI="https://dl.espressif.com/github_assets/espressif/${PN}/releases/download/v${PV}/${PN}-v${PV}.zip -> ${P}.zip
 	https://github.com/espressif/openocd-esp32/releases/download/v0.11.0-esp32-20221026/openocd-esp32-linux-amd64-0.11.0-esp32-20221026.tar.gz
+	https://github.com/espressif/binutils-gdb/releases/download/esp-gdb-v11.2_20220823/xtensa-esp-elf-gdb-11.2_20220823-x86_64-linux-gnu.tar.gz
 	${CROSSTOOL_URL}/xtensa-esp32-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
 	${CROSSTOOL_URL}/xtensa-esp32s2-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
 	${CROSSTOOL_URL}/xtensa-esp32s3-elf-gcc11_2_0-${VER}-linux-amd64.tar.xz
@@ -135,6 +137,7 @@ src_install() {
 		install_tool riscv32-esp-elf
 	fi
 	install_tool openocd-esp32
+	install_tool xtensa-esp-elf-gdb
 
 	echo "IDF_PATH=/usr/share/${PN}" > 99esp-idf || die
 	doenvd 99esp-idf
