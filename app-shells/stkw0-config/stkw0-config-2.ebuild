@@ -8,6 +8,9 @@ DESCRIPTION="My configuration"
 SLOT="0"
 KEYWORDS="~amd64"
 
+IUSE="+stkw0-desktop stkw0-work"
+RESTRICT="test"
+
 DEPEND="
 	app-admin/eclean-kernel
 	app-doc/stdman
@@ -30,6 +33,13 @@ DEPEND="
 	sys-apps/exa
 	sys-apps/lm-sensors
 	x11-terms/alacritty
+
+	stkw0-desktop? (
+		media-sound/spotify
+		!stkw0-work? ( net-im/discord )
+		stkw0-work? ( net-im/slack )
+		net-irc/quassel[-server,-crypt]
+	)
 "
 RDEPEND="${DEPEND}"
 
