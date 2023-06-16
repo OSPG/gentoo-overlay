@@ -37,7 +37,10 @@ build/
 
 # Vim
 *.sw[a-z]
+
 *.idea
+
+*.backup
 
 .kdev4/
 *.kdev4/

@@ -1,7 +1,7 @@
-# Copyright 2021 Gentoo Authors
+# Copyright 2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="My configuration"
 
@@ -10,18 +10,20 @@ KEYWORDS="~amd64"
 
 DEPEND="
 	app-admin/eclean-kernel
+	app-doc/stdman
 	app-editors/vim
+	app-i18n/translate-shell
 	app-portage/eix
 	app-portage/pfl
 	app-portage/genlop
 	app-portage/gentoolkit
-	app-text/stdman
 	app-shells/zsh
 	app-shells/zsh-completions
 	kde-apps/ffmpegthumbs
 	kde-misc/kdeconnect
 	kde-misc/kio-gdrive
 	kde-misc/plasma-pass
+	media-fonts/kochi-substitute
 	net-dns/dnscrypt-proxy
 	net-misc/chrony
 	net-misc/keychain
@@ -37,9 +39,18 @@ src_install() {
 	insinto /etc/zsh
 	doins "${FILESDIR}/zsh/"*
 
+	insinto /etc/portage
+	doins "${FILESDIR}/binrepos.conf"
+
 	for i in /home/*; do
 		insinto "$i/.config/alacritty"
 		doins "${FILESDIR}/alacritty.yml"
+		
+		insinto "$i/.gnupg"
+		doins "${FILESDIR}/gpg-agent.conf"
+
+		insinto "$i/.config/git"
+		doins "${FILESDIR}/ignore"
 	done
 }
 
