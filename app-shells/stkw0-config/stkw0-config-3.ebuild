@@ -86,6 +86,11 @@ src_install() {
 		insinto "$i/.config/git"
 		doins "${FILESDIR}/ignore"
 	done
+
+	insinto /etc/portage/sets
+	for i in ${FILESDIR}/sets/*; do
+		doins "${i}"
+	done
 }
 
 pkg_config() {

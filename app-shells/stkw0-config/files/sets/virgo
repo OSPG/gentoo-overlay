@@ -1,0 +1,25 @@
+# Python frontend
+dev-python/pybind11
+dev-python/appdirs
+dev-python/toml
+dev-python/pyzmq
+
+# CDM
+dev-cpp/catch
+dev-cpp/magic_enum
+dev-cpp/tomlplusplus
+dev-cpp/nlohmann_json
+dev-db/influxdb
+dev-libs/poco
+dev-libs/spdlog
+dev-libs/libfmt
+net-libs/cppzmq
+
+# ECI
+sci-libs/cfg
+sci-libs/cm
+sci-libs/fd
+
+# firmware
+dev-qt/qtserialport
+dev-embedded/esp-idf
