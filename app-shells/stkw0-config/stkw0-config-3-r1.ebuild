@@ -40,10 +40,12 @@ DEPEND="
 	sys-process/htop
 
 	stkw0-desktop? (
+		app-admin/qtpass
 		app-office/libreoffice
 		kde-apps/dolphin
 		kde-plasma/plasma-meta
 		mail-client/thunderbird
+		media-gfx/feh
 		media-sound/spotify
 		net-irc/quassel[-server,-crypt]
 		www-client/firefox
@@ -59,6 +61,7 @@ DEPEND="
 			app-containers/docker
 			app-containers/docker-cli
 			dev-util/ccache
+			dev-util/cppcheck
 			dev-util/kdevelop
 			net-analyzer/wireshark
 			net-im/slack
