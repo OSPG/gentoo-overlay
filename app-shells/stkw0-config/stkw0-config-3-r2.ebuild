@@ -37,6 +37,7 @@ DEPEND="
 	net-misc/keychain
 	sys-apps/exa
 	sys-apps/lm-sensors
+	sys-fs/btrfs-progs
 	sys-process/htop
 
 	stkw0-desktop? (
@@ -47,6 +48,7 @@ DEPEND="
 		mail-client/thunderbird
 		media-gfx/feh
 		media-sound/spotify
+		media-video/mpv
 		net-irc/quassel[-server,-crypt]
 		www-client/firefox
 		x11-terms/alacritty
