@@ -1,6 +1,5 @@
 # Common alias
-#alias ls="exa --git"
-alias ls="exa --git"
+alias ls="eza --git"
 alias grep="grep --color=auto"
 alias ..="cd .."
 alias s="sudo"
