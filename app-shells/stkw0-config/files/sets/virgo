@@ -1,7 +1,7 @@
 # Python frontend
 dev-python/pybind11
 dev-python/appdirs
-dev-python/toml
+dev-python/tomli
 dev-python/pyzmq
 
 # CDM
