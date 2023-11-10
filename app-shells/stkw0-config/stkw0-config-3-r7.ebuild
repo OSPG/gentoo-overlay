@@ -20,6 +20,7 @@ DEPEND="
 	app-doc/stdman
 	app-editors/vim
 	app-i18n/translate-shell
+	app-misc/zcock
 	app-portage/eix
 	app-portage/pfl
 	app-portage/genlop
