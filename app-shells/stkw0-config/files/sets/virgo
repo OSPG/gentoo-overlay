@@ -3,6 +3,9 @@ dev-python/pybind11
 dev-python/appdirs
 dev-python/tomli
 dev-python/pyzmq
+# Python GUI frontend
+dev-python/python-statemachine
+dev-python/PyQt5-stubs
 
 # CDM
 dev-cpp/catch
