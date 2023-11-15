@@ -6,6 +6,7 @@ dev-python/pyzmq
 # Python GUI frontend
 dev-python/python-statemachine
 dev-python/PyQt5-stubs
+dev-python/pyqt_tools
 
 # CDM
 dev-cpp/catch
