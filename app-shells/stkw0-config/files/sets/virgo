@@ -7,6 +7,7 @@ dev-python/pyzmq
 dev-python/python-statemachine
 dev-python/PyQt5-stubs
 dev-python/pyqt_tools
+dev-python/svgelements
 
 # CDM
 dev-cpp/catch
