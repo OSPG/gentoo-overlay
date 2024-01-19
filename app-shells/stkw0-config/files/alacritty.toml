@@ -1,0 +1,109 @@
+live_config_reload = true
+
+[bell]
+animation = "EaseOutExpo"
+duration = 0
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.bright]
+black = "0x666666"
+blue = "0x0aa6da"
+cyan = "0x54ced6"
+green = "0x7ee400"
+magenta = "0xb77ee0"
+red = "0xff0000"
+white = "0xffffff"
+yellow = "0xe0e000"
+
+[colors.dim]
+black = "0x333333"
+blue = "0x6699cc"
+cyan = "0x66cccc"
+green = "0x99cc99"
+magenta = "0xcc99cc"
+red = "0xf2777a"
+white = "0xdddddd"
+yellow = "0xffcc66"
+
+[colors.normal]
+black = "0x000000"
+blue = "0x7aa6da"
+cyan = "0x70c0ba"
+green = "0x29ea2a"
+magenta = "0xc397d8"
+red = "0xd54e53"
+white = "0xffffff"
+yellow = "0xe6e547"
+
+[colors.primary]
+background = "0x222e34"
+foreground = "0xff8e2e"
+
+[cursor]
+style = "Beam"
+
+[font]
+size = 8.75
+
+[font.bold]
+family = "Hack"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "Hack"
+
+[font.normal]
+family = "Hack"
+
+[font.offset]
+x = 0
+y = 0
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control"
+
+[mouse]
+hide_when_typing = false
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mouse = "Middle"
+
+#[mouse.double_click]
+#threshold = 300
+
+#[mouse.triple_click]
+#threshold = 300
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = false
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
+
+[shell]
+args = ["--login"]
+program = "/bin/zsh"
+
+[window]
+decorations = "full"
+dynamic_padding = false
+opacity = 0.94
+#start_mode = "maximized"
+
+[window.dimensions]
+columns = 80
+lines = 24
+
+[window.padding]
+x = 2
+y = 2
