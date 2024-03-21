@@ -15,3 +15,6 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 # When using a hist thing, make a newline show the change before executing it.
 setopt HIST_VERIFY
+
+ATUIN_NOBIND="true"
+eval "$(atuin init zsh)"
