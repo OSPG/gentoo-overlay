@@ -19,10 +19,16 @@ local current_dir='%{$fg[cyan]%}%3c%{$reset_color%}'
 local return_code="%(?..%{$fg[red]%}%? ⚑%{$reset_color%}) $(echo -ne "\0")"
 local git_info='${vcs_info_msg_0_}'
 
+if [[ ${SSH_TTY} ]] ; then
+	SSH="🌐"
+else
+	SSH=""
+fi
+
 RPROMPT="${current_dir} ${git_info} ${return_code}"
 if [ "$EUID" = "0" ] || [ "$USER" = "root" ] ; then
-	PROMPT=$'\n$(zcock)'" %{$fg_bold[black]%}@%M%{$reset_color%} %(1j.[%j] .)%{$fg_bold[yellow]%}❱%{$reset_color%} "
+	PROMPT=$'\n$(zcock)'" ${SSH} %{$fg_bold[black]%}@%M%{$reset_color%} %(1j.[%j] .)%{$fg_bold[yellow]%}❱%{$reset_color%} "
 else
-	PROMPT=$'\n$(zcock)'" %{$fg_bold[black]%}@%M%{$reset_color%} %(1j.[%j] .)%{$fg_bold[blue]%}❱%{$reset_color%} "
+	PROMPT=$'\n$(zcock)'" ${SSH} %{$fg_bold[black]%}@%M%{$reset_color%} %(1j.[%j] .)%{$fg_bold[blue]%}❱%{$reset_color%} "
 fi
 
