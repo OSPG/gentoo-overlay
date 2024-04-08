@@ -30,6 +30,7 @@ DEPEND="
 	net-analyzer/netcat
 	net-misc/chrony
 	net-misc/keychain
+	net-vpn/tailscale
 	sys-apps/eza
 	sys-apps/lm-sensors
 	sys-fs/btrfs-progs
@@ -39,9 +40,13 @@ DEPEND="
 	stkw0-desktop? (
 		app-admin/qtpass
 		app-admin/sudo
+		app-backup/restic
+		app-benchmarks/hyperfine
 		app-doc/stdman
 		app-i18n/translate-shell
 		app-office/libreoffice
+		dev-util/ebuildtester
+		kde-apps/ark
 		kde-apps/dolphin
 		kde-apps/ffmpegthumbs
 		kde-misc/kdeconnect
@@ -65,6 +70,7 @@ DEPEND="
 		stkw0-work? (
 			app-text/doxygen
 			app-containers/docker
+			app-containers/docker-buildx
 			app-containers/docker-cli
 			dev-util/ccache
 			dev-util/cppcheck
