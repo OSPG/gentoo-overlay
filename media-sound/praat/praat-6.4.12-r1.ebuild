@@ -34,6 +34,9 @@ DEPEND="
 "
 
 S="${WORKDIR}/praat-${PV}"
+PATCHES=(
+	"${FILESDIR}"/${P}-xdg-support.patch
+)
 
 src_prepare() {
 	local mk_default
