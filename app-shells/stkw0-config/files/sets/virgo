@@ -12,6 +12,7 @@ dev-python/guiqwt
 
 # CDM
 dev-cpp/catch
+dev-cpp/cli11
 dev-cpp/magic_enum
 dev-cpp/tomlplusplus
 dev-cpp/nlohmann_json
