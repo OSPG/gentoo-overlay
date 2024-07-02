@@ -17,7 +17,9 @@ RESTRICT="test"
 
 DEPEND="
 	app-admin/eclean-kernel
+	app-admin/needrestart
 	app-editors/vim
+	app-misc/godedupe
 	app-misc/zcock
 	app-portage/eix
 	app-portage/pfl
@@ -45,7 +47,6 @@ DEPEND="
 		app-doc/stdman
 		app-i18n/translate-shell
 		app-office/libreoffice
-		dev-util/ebuildtester
 		kde-apps/ark
 		kde-apps/dolphin
 		kde-apps/ffmpegthumbs
@@ -64,6 +65,8 @@ DEPEND="
 
 		!stkw0-work? (
 			net-im/discord
+			net-im/nheko
+			net-im/telegram-desktop
 			net-p2p/qbittorrent
 		)
 

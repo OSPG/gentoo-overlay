@@ -1,0 +1,47 @@
+From 8022dbf3f4d615dc3d737a8309be7d0c789e9b7a Mon Sep 17 00:00:00 2001
+From: Zephyr Lykos <git@mochaa.ws>
+Date: Fri, 12 Apr 2024 22:39:01 +0800
+Subject: [PATCH] Compliance with XDG specifications on UNIX systems
+
+Signed-off-by: Zephyr Lykos <git@mochaa.ws>
+---
+ melder/melder_files.cpp | 11 +++++++++--
+ sys/praat.cpp           |  2 +-
+ 2 files changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/melder/melder_files.cpp b/melder/melder_files.cpp
+index e14415efc..39be256d9 100644
+--- a/melder/melder_files.cpp
++++ b/melder/melder_files.cpp
+@@ -540,9 +540,16 @@ void Melder_getParentPreferencesFolder (MelderFolder preferencesFolder) {
+ 		Melder_sprint (preferencesFolder -> path,kMelder_MAXPATH+1, homeFolder. path, U"/Library/Preferences");
+ 	#elif defined (UNIX)
+ 		/*
+-			Preferences files go into the home folder.
++			Preferences files go into ${XDG_CONFIG_HOME}.
+ 		*/
+-		Melder_getHomeDir (preferencesFolder);
++		structMelderFolder homeFolder { };
++		char *xdgConfigHome = getenv ("XDG_CONFIG_HOME");
++		if (!xdgConfigHome) {
++			Melder_getHomeDir (& homeFolder);
++			Melder_sprint (preferencesFolder -> path,kMelder_MAXPATH+1, homeFolder. path, U"/.config");
++		} else {
++			Melder_sprint (preferencesFolder -> path,kMelder_MAXPATH+1, Melder_peek8to32 (xdgConfigHome));
++		}
+ 	#elif defined (_WIN32)
+ 		/*
+ 			On Windows 95, preferences files went into the Windows folder.
+diff --git a/sys/praat.cpp b/sys/praat.cpp
+index f7f50f81e..1c30e3733 100644
+--- a/sys/praat.cpp
++++ b/sys/praat.cpp
+@@ -1442,7 +1442,7 @@ void praat_init (conststring32 title, int argc, char **argv)
+ 		*/
+ 		char32 subfolderName [256];
+ 		#if defined (UNIX)
+-			Melder_sprint (subfolderName,256, U".", programName, U"-dir");   // for example .praat-dir
++			Melder_sprint (subfolderName,256, programName);   // for example praat
+ 		#elif defined (macintosh)
+ 			Melder_sprint (subfolderName,256, praatP.title.get(), U" Prefs");   // for example Praat Prefs
+ 		#elif defined (_WIN32)

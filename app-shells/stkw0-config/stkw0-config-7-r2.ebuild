@@ -17,7 +17,9 @@ RESTRICT="test"
 
 DEPEND="
 	app-admin/eclean-kernel
+	app-admin/needrestart
 	app-editors/vim
+	app-misc/godedupe
 	app-misc/zcock
 	app-portage/eix
 	app-portage/pfl
@@ -45,7 +47,6 @@ DEPEND="
 		app-doc/stdman
 		app-i18n/translate-shell
 		app-office/libreoffice
-		dev-util/ebuildtester
 		kde-apps/ark
 		kde-apps/dolphin
 		kde-apps/ffmpegthumbs
@@ -64,6 +65,8 @@ DEPEND="
 
 		!stkw0-work? (
 			net-im/discord
+			net-im/nheko
+			net-im/telegram-desktop
 			net-p2p/qbittorrent
 		)
 
@@ -77,6 +80,7 @@ DEPEND="
 			dev-util/kdevelop
 			net-analyzer/wireshark
 			net-im/slack
+			sys-auth/nss-mdns
 		)
 	)
 "
@@ -115,8 +119,15 @@ pkg_config() {
 	rc-update add chronyd default
 	rc-service chronyd start
 
+	rc-update add tailscale default
+	rc-service tailscale start
+
 	if use stkw0-work; then
 		rc-update add docker default
 		rc-service docker start
+
+		rc-update add avahi-daemon default
+		rc-service avahi-daemon start
+		# For the client-side eddit /etc/nsswitch.conf 
 	fi
 }
