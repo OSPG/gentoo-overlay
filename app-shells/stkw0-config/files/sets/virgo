@@ -1,3 +1,5 @@
+dev-libs/ifae-libs
+
 # Python frontend
 dev-python/pybind11
 dev-python/appdirs
