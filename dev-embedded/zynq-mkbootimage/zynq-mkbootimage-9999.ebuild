@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 inherit autotools
 
@@ -15,12 +15,11 @@ fi
 
 LICENSE="BSD-2-Clause"
 SLOT="0"
-IUSE=""
 
-DEPEND="dev-libs/libpcre
-        virtual/libelf"
-
-RDEPEND=""
+DEPEND="
+	dev-libs/libpcre
+	virtual/libelf
+"
 
 src_install() {
 	dobin mkbootimage
