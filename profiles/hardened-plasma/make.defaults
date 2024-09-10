@@ -1,1 +1,13 @@
-USE="apparmor"
+USE="apparmor lto"
+
+COMMON_FLAGS="-O3 -march=native -mtune=native -w --param ggc-min-expand=40 --param ggc-min-heapsize=2097152 \
+	-flto=auto -Werror=odr -Werror=lto-type-mismatch -Werror=strict-aliasing"
+
+CFLAGS="${CFLAGS} ${COMMON_FLAGS}"
+CXXFLAGS="${CXXFLAGS} ${COMMON_FLAGS}"
+FCFLAGS="${FCFLAGS} ${COMMON_FLAGS}"
+FFFLAGS="${FFFLAGS} ${COMMON_FLAGS}"
+LDFLAGS="${LDFLAGS} -flto=auto"
+RUSTFLAGS="${RUSTFLAGS} -Clinker-plugin-lto"
+
+PORTAGE_NICENESS=17
