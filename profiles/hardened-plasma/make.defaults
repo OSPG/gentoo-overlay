@@ -1,7 +1,7 @@
 USE="apparmor lto"
 
 COMMON_FLAGS="-O3 -march=native -mtune=native -w --param ggc-min-expand=40 --param ggc-min-heapsize=2097152 \
-	-flto=auto -Werror=odr -Werror=lto-type-mismatch -Werror=strict-aliasing"
+	-flto=auto -Werror=odr -Werror=lto-type-mismatch -Werror=strict-aliasing -fipa-pta"
 
 CFLAGS="${CFLAGS} ${COMMON_FLAGS}"
 CXXFLAGS="${CXXFLAGS} ${COMMON_FLAGS}"
