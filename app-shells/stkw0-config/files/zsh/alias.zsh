@@ -6,6 +6,7 @@ alias s="sudo"
 alias b='cd $OLDPWD'
 alias load-ssh-key="keychain ~/.ssh/id_ed25519; . ~/.keychain/${HOST}-sh"
 alias p="python"
+alias cat="bat --theme=ansi -pp"
 
 # Gentoo alias
 alias eixi="eix -I"
