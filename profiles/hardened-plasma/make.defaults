@@ -9,6 +9,8 @@ CXXFLAGS="${CXXFLAGS} ${COMMON_FLAGS}"
 FCFLAGS="${FCFLAGS} ${COMMON_FLAGS}"
 FFFLAGS="${FFFLAGS} ${COMMON_FLAGS}"
 LDFLAGS="${LDFLAGS} -flto=auto"
-RUSTFLAGS="${RUSTFLAGS} -Clinker-plugin-lto -C target-cpu=native -C link-arg=-Wl,-z,pack-relative-relocs -C opt-level=3"
+
+# To early to enable -Clinker-plugin-lto still some toolchain bugs present
+RUSTFLAGS="${RUSTFLAGS} -C target-cpu=native -C link-arg=-Wl,-z,pack-relative-relocs -C opt-level=3"
 
 PORTAGE_NICENESS=17
