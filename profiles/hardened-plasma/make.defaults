@@ -1,5 +1,7 @@
 SYSTEM_USE="system-icu system-libevent system-cairo system-harfbuzz system-sqlite system-jpeg system-cmake system-gdb system-jsoncpp system-libvpx system-lua system-libyaml system-llvm"
-USE="apparmor lto ${SYSTEM_USE}"
+USE="apparmor lto cjk ${SYSTEM_USE}"
+
+FEATURES="parallel-fetch parallel-install nodoc noinfo"
 
 COMMON_FLAGS="-O3 -march=native -mtune=native -w --param ggc-min-expand=40 --param ggc-min-heapsize=2097152 \
 	-flto=auto -Werror=odr -Werror=lto-type-mismatch -Werror=strict-aliasing -fipa-pta \
