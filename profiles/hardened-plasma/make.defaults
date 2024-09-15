@@ -2,7 +2,8 @@ SYSTEM_USE="system-icu system-libevent system-cairo system-harfbuzz system-sqlit
 USE="apparmor lto ${SYSTEM_USE}"
 
 COMMON_FLAGS="-O3 -march=native -mtune=native -w --param ggc-min-expand=40 --param ggc-min-heapsize=2097152 \
-	-flto=auto -Werror=odr -Werror=lto-type-mismatch -Werror=strict-aliasing -fipa-pta"
+	-flto=auto -Werror=odr -Werror=lto-type-mismatch -Werror=strict-aliasing -fipa-pta \
+	-fdevirtualize-at-ltrans -fno-plt"
 
 CFLAGS="${CFLAGS} ${COMMON_FLAGS}"
 CXXFLAGS="${CXXFLAGS} ${COMMON_FLAGS}"
