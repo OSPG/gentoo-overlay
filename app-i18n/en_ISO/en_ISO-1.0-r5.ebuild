@@ -29,7 +29,7 @@ pkg_postinst() {
 	elog "Afterwards, you'll be able to set LANG=en_ISO.UTF-8 in your environment"
 	elog ""
 	elog "You can automatically rebuild the locales with:"
-	elog "    emerge --config ${CATEGORY}/${P}"
+	elog "    emerge --config ${CATEGORY}/${PN}"
 }
 
 pkg_config() {
