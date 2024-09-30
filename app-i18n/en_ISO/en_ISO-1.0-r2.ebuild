@@ -25,15 +25,15 @@ src_install() {
 }
 
 pkg_postinst() {
-	einfo "In order to use the new locale, remember to configure and build your locales"
-	einfo "Afterwards, you'll be able to set LANG=en_ISO.UTF-8 in your environment"
-	einfo ""
-	einfo "You can automatically rebuild the locales with:"
-	einfo "    emerge --config ${CATEGORY}/${P}"
+	elog "In order to use the new locale, remember to configure and build your locales"
+	elog "Afterwards, you'll be able to set LANG=en_ISO.UTF-8 in your environment"
+	elog ""
+	elog "You can automatically rebuild the locales with:"
+	elog "    emerge --config ${CATEGORY}/${P}"
 }
 
 pkg_config() {
-	if ! grep -q "^[[:space:]]*en_ISO.UTF-8 UTF-8" /etc/locale.gen; then
+	if ! locale-gen -l | grep -q "^[[:space:]]*en_ISO.UTF-8 UTF-8"; then
 		einfo "Adding locale to locale.gen..."
 		echo "en_ISO.UTF-8 UTF-8" >> /etc/locale.gen
 	fi
