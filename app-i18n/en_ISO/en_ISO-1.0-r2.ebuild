@@ -25,11 +25,11 @@ src_install() {
 }
 
 pkg_postinst() {
-	elog "In order to use the new locale, remember to configure and build your locales"
-	elog "Afterwards, you'll be able to set LANG=en_ISO.UTF-8 in your environment"
-	elog ""
-	elog "You can automatically rebuild the locales with:"
-	elog "    emerge --config ${CATEGORY}/${P}"
+	einfo "In order to use the new locale, remember to configure and build your locales"
+	einfo "Afterwards, you'll be able to set LANG=en_ISO.UTF-8 in your environment"
+	einfo ""
+	einfo "You can automatically rebuild the locales with:"
+	einfo "    emerge --config ${CATEGORY}/${P}"
 }
 
 pkg_config() {
