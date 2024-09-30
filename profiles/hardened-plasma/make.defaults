@@ -1,5 +1,5 @@
 SYSTEM_USE="system-icu system-libevent system-cairo system-harfbuzz system-sqlite system-jpeg system-cmake system-gdb system-jsoncpp system-libvpx system-lua system-libyaml system-llvm system-png"
-USE="apparmor lto cjk ${SYSTEM_USE}"
+USE="apparmor lto cjk verify-sig ${SYSTEM_USE}"
 
 FEATURES="parallel-fetch parallel-install nodoc noinfo"
 
