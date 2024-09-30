@@ -33,7 +33,7 @@ pkg_postinst() {
 }
 
 pkg_config() {
-	if ! locale-gen -l | grep -q "^[[:space:]]*en_ISO.UTF-8 UTF-8"; then
+	if ! locale-gen -l 2>/dev/null | grep -q "en_ISO.UTF-8"; then
 		einfo "Adding locale to locale.gen..."
 		echo "en_ISO.UTF-8 UTF-8" >> /etc/locale.gen
 	fi
