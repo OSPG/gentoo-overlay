@@ -22,17 +22,22 @@ src_install() {
 	doins Compose || die
 	doins XLC_LOCALE || die
 	doins XI18N_OBJS || die
-
-	einfo "Updating locale.gen..."
-	if ! grep -q "en_ISO.UTF-8 UTF-8" /etc/locale.gen; then
-		echo "en_ISO.UTF-8 UTF-8" >> /etc/locale.gen
-	fi
-
 }
 
 pkg_postinst() {
-	elog "In order to use the new locale, remember to update your locales:"
-	elog "    locale-gen"
+	elog "In order to use the new locale, remember to configure and build your locales"
 	elog "Afterwards, you'll be able to set LANG=en_ISO.UTF-8 in your environment"
+	elog ""
+	elog "You can automatically rebuild the locales with:"
+	elog "    emerge --config ${CATEGORY}/${P}"
+}
+
+pkg_config() {
+	if ! grep -q "^[[:space:]]*en_ISO.UTF-8 UTF-8" /etc/locale.gen; then
+		einfo "Adding locale to locale.gen..."
+		echo "en_ISO.UTF-8 UTF-8" >> /etc/locale.gen
+	fi
+
+	locale-gen || die
 }
 
