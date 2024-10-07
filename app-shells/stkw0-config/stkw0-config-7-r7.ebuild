@@ -26,6 +26,7 @@ DEPEND="
 	app-portage/genlop
 	app-portage/gentoolkit
 	app-shells/atuin
+	app-shells/stkw0-base-files
 	app-shells/zsh
 	app-shells/zsh-completions
 	media-fonts/kochi-substitute
@@ -96,9 +97,6 @@ S="${FILESDIR}"
 src_install() {
 	insinto /etc/zsh
 	doins "${FILESDIR}/zsh/"*
-
-	insinto /etc/portage
-	doins "${FILESDIR}/binrepos.conf"
 
 	for i in /home/*; do
 		insinto "$i/.config/alacritty"
