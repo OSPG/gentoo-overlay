@@ -1,0 +1,2 @@
+dev-libs/boost disable-unsafe-flags.conf
+dev-libs/botan disable-unsafe-flags.conf
