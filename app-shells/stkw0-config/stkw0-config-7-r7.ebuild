@@ -26,7 +26,7 @@ DEPEND="
 	app-portage/genlop
 	app-portage/gentoolkit
 	app-shells/atuin
-	app-shells/stkw0-base-files
+	app-shells/extra-portage-conf
 	app-shells/zsh
 	app-shells/zsh-completions
 	media-fonts/kochi-substitute
