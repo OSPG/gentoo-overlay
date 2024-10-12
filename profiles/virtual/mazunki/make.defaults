@@ -1,0 +1,20 @@
+
+FEATURES="getbinpkg binpkg-request-signature"
+
+EMERGE_DEFAULT_OPTS="
+	--ask --verbose --quiet-build --quiet-fail
+	--keep-going
+	--autounmask=y --autounmask-use=y --autounmask-license=y
+	--backtrack=69
+"
+
+COMMON_FLAGS="-march=native -O2 -pipe"
+CFLAGS="${COMMON_FLAGS}"
+CXXFLAGS="${COMMON_FLAGS}"
+FCFLAGS="${COMMON_FLAGS}"
+FFLAGS="${COMMON_FLAGS}"
+
+L10N="ca en en-GB en-US es nb"
+LC_MESSAGES=C.utf8
+
+USE="vim-syntax"
