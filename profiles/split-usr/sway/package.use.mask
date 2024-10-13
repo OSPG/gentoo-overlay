@@ -1,0 +1,5 @@
+# emacs supports wayland with USE=gtk.
+# we assume USE=X was globally enabled, and not package-specific
+# see https://bugs.gentoo.org/931203
+app-editors/emacs X
+

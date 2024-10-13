@@ -3,3 +3,5 @@
 # other wms often have their own keyrings
 dev-libs/qtkeychain keyring
 
+app-editors/emacs gtk
+
