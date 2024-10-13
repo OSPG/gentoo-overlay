@@ -6,12 +6,12 @@ DESCRIPTION="Praat: doing phonetics by computer"
 HOMEPAGE="http://www.praat.org/"
 SRC_URI="https://github.com/praat/praat/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 
-IUSE="+pulseaudio +alsa static-libs +X"
-KEYWORDS="~amd64 ~x86"
 LICENSE="GPL-2"
 SLOT="0"
 
-# NOTE: i stole some of these deps from zugaina
+KEYWORDS="~amd64 ~x86"
+IUSE="+pulseaudio +alsa static-libs +X"
+
 RDEPEND="
 	x11-libs/gtk+:3
 	x11-libs/libX11
@@ -24,16 +24,15 @@ RDEPEND="
 	sci-mathematics/glpk
 	virtual/pkgconfig
 	alsa? ( media-libs/alsa-lib )
-	pulseaudio? ( media-sound/pulseaudio )
+	pulseaudio? ( media-libs/libpulse )
 "
 DEPEND="
-	pulseaudio? ( media-sound/pulseaudio )
+	pulseaudio? ( media-libs/libpulse )
 	static-libs? ( media-libs/alsa-lib )
 	X? ( x11-libs/gtk+:3 )
 	!X? ( x11-libs/pango )
 "
 
-S="${WORKDIR}/praat-${PV}"
 PATCHES=(
 	"${FILESDIR}"/${P}-xdg-support.patch
 )
