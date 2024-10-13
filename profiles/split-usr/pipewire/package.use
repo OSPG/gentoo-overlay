@@ -1,4 +1,7 @@
 
+media-video/pipewire sound-server pipewire-alsa
+media-sound/pulseaudio -daemon
+
 net-im/nheko voip video
 dev-qt/qtmultimedia gstreamer
 
