@@ -40,8 +40,9 @@ src_install() {
 }
 
 pkg_postinst() {
+	# TODO: put these into env.d directly?
 	elog "You may want to add these scripts to your PATH"
-	elog "    : export PATH=\"/usr/bin/maz-scripts:${PATH}\""
+	elog "    : export PATH=\"/usr/lib/maz-scripts/bin:${PATH}\""
 }
 
 
