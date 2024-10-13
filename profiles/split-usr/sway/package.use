@@ -1,0 +1,5 @@
+
+# required for nheko service integration, amongst other
+# other wms often have their own keyrings
+dev-libs/qtkeychain keyring
+

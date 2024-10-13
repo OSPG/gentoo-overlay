@@ -1,0 +1,19 @@
+# TODO: filter use flags into corresponding pipewire or sway profiles, when meaningful
+gui-apps/waybar mpd tray network wifi
+sys-apps/s6 execline
+
+app-text/texlive luatex xetex extra science cjk humanities
+app-admin/keepassxc browser autotype keeshare 
+
+# enables user+group and service
+net-p2p/qbittorrent webui
+
+# required by the turtle module
+dev-lang/python tk
+
+# enable support for all the things
+app-text/zathura-meta cb djvu pdf
+
+# required for non-png background images
+gui-apps/swaybg gdk-pixbuf
+
