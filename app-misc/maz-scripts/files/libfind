@@ -1,0 +1,34 @@
+#!/bin/sh
+# finds libraries matching a pattern on common library paths.
+#   note that object versions are ignored
+
+get_default_linker_paths() {
+	ld --verbose |
+		grep -o 'SEARCH_DIR("[^"]*")' |
+		sed 's/SEARCH_DIR("\([^)]*\)")/\1/'
+}
+
+find_libs() {
+	path="${1}"
+	shift
+	test -d "${path}" || return
+	for lib; do
+		lib="${lib#lib}"
+		find "${path}" -name "lib${lib%.so*}.so*"
+	done
+}
+
+if test -n "${LD_LIBRARY_PATH+x}"; then
+	printf 'LD_LIBRARY_PATH was set. Ignoring default paths.\n' >&2
+	(IFS=':'
+	for path in ${LD_LIBRARY_PATH}; do
+		find_libs "${path}" "$@"
+	done)
+else
+	for path in $(get_default_linker_paths); do
+		find_libs "${path}" "$@"
+	done
+fi
+
+#  vim: set sw=8 ts=8
+

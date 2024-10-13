@@ -1,0 +1,11 @@
+#!/bin/sh
+# do you want to prettify the output of your users? use me!
+
+exec \
+	column -s':' -t -o' :' < /etc/passwd |
+	sort -t':' -k3n |
+	bat -p -l passwd --color=always |
+	tr -d ':'
+
+#  vim: set sw=8 ts=8
+

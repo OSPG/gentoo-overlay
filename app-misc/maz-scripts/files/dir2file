@@ -1,0 +1,36 @@
+#!/bin/sh
+# converts a directory into a single file.
+#   the content of the files will be deleted.
+#   the new file will list the names of all the
+#   files it contained contained
+
+set -eu
+
+delimiter='
+'
+
+err() {
+  printf '%s: error: %s\n' "$0" "${1:-failed}" >&2
+  exit "${2:-1}"
+}
+
+while getopts ":0" opt; do
+  case $opt in
+    0) delimiter="$(printf '\0')" ;;
+    *) err "Invalid option: -$OPTARG" ;;
+  esac
+done
+
+shift $((OPTIND-1))
+test $# -gt 0 || err "usage: $0 [-0] <target>"
+
+for target; do
+  temp_file="$(mktemp)"
+
+  find "${target}" -type f -printf '%P\0' |
+    tr '\0' "${delimiter}" > "${temp_file}"
+
+  rm -r "${target}"
+  mv "${temp_file}" "${target}"
+done
+

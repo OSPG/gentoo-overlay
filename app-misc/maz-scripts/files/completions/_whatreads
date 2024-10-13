@@ -1,0 +1,37 @@
+#compdef whatreads
+
+_list_mime_minor() {
+	find \
+	/usr/share/applications \
+	"$XDG_DATA_HOME"/applications \
+	-name "*.desktop" \
+	-exec sh -c 'grep "^MimeType=" "$0" | cut -d"=" -f2- | tr ";" "\n"' {} \; |
+		grep "^$1"
+}
+
+_list_mime_major() {
+	find \
+		/usr/share/applications \
+		"$XDG_DATA_HOME"/applications \
+		-name "*.desktop" \
+		-exec sh -c 'grep "^MimeType=" "$0" | cut -d"=" -f2- | tr ";" "\n"' {} \; |
+			cut -d'/' -f1 | grep . | sort -u
+}
+
+_whatreads() {
+	_arguments -C \
+		'1:type:->type'
+
+	case "$state" in
+		(type)
+			if [[ ${words[CURRENT]} == */* ]]; then
+				_values 'major/minor mimetype' $(_list_mime_minor "${words[CURRENT]}")
+			else
+				_values 'groups' $(_list_mime_minor)
+			fi
+			;;
+	esac
+}
+
+_whatreads "$@"
+

@@ -1,0 +1,20 @@
+#!/bin/sh
+help() {
+	printf "Each argument is an ex command. Last one is a filename\n"
+}
+test -t 1 && set -- "$@" /dev/stdin
+
+[ "$#" -gt 1 ] || { help; exit; }
+
+cmds=""
+while [ "$#" -gt 1 ] ; do
+	if [ -n "${2}" ]; then
+		cmds="${cmds}-c '${1}'"
+	fi
+	shift
+	[ "$#" -gt 1 ] && cmds="${cmds} "
+done
+
+exec vim -es ${cmds:?} +'%write! /dev/stdout' +'qa!' "${1:?no filename}"
+
+

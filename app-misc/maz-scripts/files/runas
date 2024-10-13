@@ -1,0 +1,23 @@
+#!/bin/sh
+# want to run an app as another user? use me!
+
+error() {
+	errno=${2:-1}
+	printf "[error] runas: %s\n" "${1:-failed}"
+	exit $errno
+}
+
+user="$1"
+shift 1 2>/dev/null || error "must provide user"
+
+getent passwd "$user" >/dev/null
+case $? in
+	0) break ;;
+	1) error "getent failed" ;;
+	2) error "no such user" ;;
+	3) error "enumeration not supported" ;;
+	*) error "huh?" ;;
+esac
+
+exec doas s6-setuidgid "$user" "$@"
+

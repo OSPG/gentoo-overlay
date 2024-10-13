@@ -1,0 +1,6 @@
+#compdef file2dir
+
+_arguments \
+	'-0[use null character as delimiter]' \
+	'*:target: _files'
+

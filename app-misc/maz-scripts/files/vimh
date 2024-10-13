@@ -1,0 +1,7 @@
+#!/bin/sh
+# ever want to read the vim manual without already being inside vim?
+
+exec vim -c "help ${1}|only|nnoremap q ZQ"
+
+#  vim: set sw=8 ts=8
+

@@ -1,0 +1,11 @@
+#compdef picker
+
+_arguments \
+  '1:prompt:->prompt'
+
+case $state in
+  prompt)
+    _message 'prompt info'
+    ;;
+esac
+

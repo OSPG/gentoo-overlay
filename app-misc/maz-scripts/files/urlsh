@@ -1,0 +1,87 @@
+#!/bin/sh
+# this tool is cursed.
+#    in summary does `curl ... | sh` with some caching
+
+: "${URLSH_RUNTIME_DIR:=${XDG_RUNTIME_DIR}/urlsh}"
+
+usage() {
+	printf '%s\n' "Description"
+	printf '\t%s\n' 'Allows the user to run commands from trusted domains' \
+			'defined in URLSH_PATH.'
+	printf '\n'
+
+	printf '\t%s\n' \
+		'Trusted domains must expose /Packages on their root path' \
+		'Only https:// schema is supported.'
+	printf '\n'
+
+	printf '%s\n' 'Synopsis'
+	printf '\t%s %s\n' "$(basename "$0")" '[options] [--] <url> [args...]'
+	printf '\n'
+
+	printf '%s\n' 'Options'
+	printf '  %18s :\t%s\n' \
+		'--help' 'Displays usage'
+	printf '\n'
+
+	printf '%s\n' 'Environment'
+	printf '  %18s :\t%s\n' \
+		'URLSH_RUNTIME_DIR' 'Temporary directory for executable files' \
+		'URLSH_PATH' 'Colon-separated list of schemaless URLs'
+}
+
+err() {
+	__status="$1"
+	shift
+	printf "%s: %s\n" "$(basename "$0")" "$@"
+	exit "${__status}"
+}
+
+
+url_exec() {
+	cmd_local="$(mktemp --tmpdir="${URLSH_RUNTIME_DIR}/" -t "${2}.XXXX")"
+	wget -q -O "${cmd_local}" "${1}/${2}"
+
+	shift 2
+
+	chmod +x "${cmd_local}"
+	exec "${cmd_local}" "$@"
+}
+
+if [ $# -lt 1 ]; then
+	usage
+	exit 1
+fi
+
+for arg in "$@"; do
+	case "${arg}" in
+		--) shift; break ;;
+		--help) usage; exit ;;
+		-v|--verbose) shift; set -x ;;
+		--*) err 1 "no such flag: ${arg}" ;;
+	esac
+done
+
+if [ -z "${URLSH_PATH+x}" ]; then
+	err 2 "URLSH_PATH not defined. Please refer to --help"
+fi
+
+cmd_name="$1"
+shift
+
+mkdir -p "${URLSH_RUNTIME_DIR}" || err 1 "couldn't create urlsh dir"
+
+__urlsh_IFS="${IFS}"
+IFS=:
+for location in ${URLSH_PATH}; do
+	if curl -s "https://${location}/Packages" | grep -q -x "${cmd_name}"; then
+		IFS="${__urlsh_IFS}"
+		unset "${__urlsh_IFS}"
+		url_exec "https://${location}" "${cmd_name}" "$@"
+	fi
+done
+
+err 127 "command not found: ${cmd_name}"
+
+#  vim: set sw=8 ts=8
+

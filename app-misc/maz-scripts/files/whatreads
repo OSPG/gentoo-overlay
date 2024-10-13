@@ -1,0 +1,9 @@
+#!/bin/sh
+# ever want a list of all .desktop application which support some specific format? use me!
+
+find \
+	/usr/share/applications \
+	"${XDG_DATA_HOME:-$HOME/.local/share}"/applications \
+	-name '*.desktop' \
+	-exec grep -q "$1" {} \; \
+	-print

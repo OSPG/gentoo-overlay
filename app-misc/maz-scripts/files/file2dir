@@ -1,0 +1,35 @@
+#!/bin/sh
+# converts a file into a directory
+#   the file is assumed to contain a list
+#   of files to be created in the directory
+set -eu
+
+delimiter='
+'
+
+err() {
+  printf '%s: error: %s\n' "$0" "${1:-failed}" >&2
+  exit "${2:-1}"
+}
+
+while getopts ":0" opt; do
+  case $opt in
+    0) delimiter="$(printf '\0')" ;;
+    *) err "Invalid option: -$OPTARG" ;;
+  esac
+done
+
+shift $((OPTIND-1))
+test $# -gt 0 || err "usage: $0 [-0] <target>"
+
+for target; do
+  temp_dir="$(mktemp -d)"
+
+  while IFS= read -r entry; do
+    touch "${temp_dir}/${entry}"
+  done < "${target}"
+
+  rm "${target}"
+  mv "${temp_dir}" "${target}"
+done
+

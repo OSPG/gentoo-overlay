@@ -1,0 +1,27 @@
+#!/bin/sh
+# tired of having a C project which you just
+# want to compile, run, and delete?
+#
+# interpreted C, anyone? use me lmao
+#
+set -eu
+
+: "${CC:=cc}"
+old_dir="$(pwd)"
+
+tmpdir="$(mktemp --directory)"
+cp -t "${tmpdir}" "${@}"
+
+cd "${tmpdir}"
+
+cc -o "${tmpdir}"/main "${@}"
+./main
+ret=$?
+
+cd "${old_dir}"
+rm -rf "${tmpdir}"
+
+exit ${ret}
+
+#  vim: set sw=8 ts=8
+

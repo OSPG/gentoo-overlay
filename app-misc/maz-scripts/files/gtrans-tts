@@ -1,0 +1,22 @@
+#!/bin/sh
+
+url="http://translate.googleapis.com/translate_tts?client=gtx"
+lang=en
+
+gtranstts() {
+	q="$(printf %s "$1" | tr ' ' '+')"
+	curl "${url}&tl=${lang}&q=${q}"
+}
+
+for arg; do
+	if test -t 1; then
+		printf "%s: " "Please enter filename (mp3)"
+		read -r filename
+		gtranstts "${arg}" > "${filename}"
+	else
+		gtranstts "$arg"
+	fi
+done
+
+#  vim: set ts=8
+

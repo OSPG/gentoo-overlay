@@ -1,0 +1,41 @@
+#!/bin/sh
+# have a few users on your system and want to quickly set up ssh keys for it? use me!
+
+usage() {
+	printf '%b\n' '\033[1musage:\033[0m'
+	printf '    echo <your key> | %s %s\n' "$0" '<user>'
+	printf '\n'
+}
+
+test $# -eq 1 || { usage; exit 1; }
+if [ "$1" = '--help' ] || [ "$1" = '-h' ]; then usage; exit; fi
+
+user="${1}"
+getent passwd "${user}" || { printf 'no such user\n'; exit 1; }
+
+if [ "${USER}" != "${user}" ]; then
+	printf '%s\n' "changing user"
+	exec su -l "${user}" "$0" "$1"
+fi
+shift
+
+SSH_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"/ssh
+
+setup_xdg_ssh_home() {
+	mkdir -p "${SSH_HOME}"
+	test -L "${SSH_HOME}" || ln -sT "${SSH_HOME}" "${HOME}/.ssh"
+	chmod 700 "${SSH_HOME}"
+}
+
+create_authorized_keys() {
+	touch "${SSH_HOME}"/authorized_keys
+	chmod 644 "${SSH_HOME}"/authorized_keys
+}
+
+test -d "${SSH_HOME}" || setup_xdg_ssh_home
+test -e "${SSH_HOME}"/authorized_keys || create_authorized_keys
+
+cat | tee -a "${SSH_HOME}"/authorized_keys
+
+#  vim: set sw=8 ts=8
+

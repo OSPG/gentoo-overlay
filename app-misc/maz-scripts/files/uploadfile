@@ -1,0 +1,16 @@
+#!/bin/sh
+# uploads files to CLIPBOARD_HOST, with the key being the filename
+
+: "${CLIPBOARD_HOST:?need to know where to upload}"
+
+upload() {
+	curl -F "${1}=<${2}" "${HOST}"
+}
+
+for file; do
+	test -d "${file}" && { printf "can't upload dirs: %s" "${file}"; continue; }
+	upload "$(basename "${file}")" "${file}"
+done
+
+#  vim: set sw=8 ts=8
+

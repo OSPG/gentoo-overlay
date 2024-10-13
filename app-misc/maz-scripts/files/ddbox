@@ -1,0 +1,69 @@
+#!/bin/sh
+# 
+# uhhhhh cursed data
+
+help() {
+	printf '%b\n' '\e[1musage:\e[0m'
+	printf '    %s %s\n' "$0" '{geometry} {data}'
+	printf '\n'
+	printf '%b\n' '\e[1mgeometry\e[0m:               defaults to size=8'
+	printf '%s\n' '    <width> <height>    characters per direction'
+	printf '%s\n' '    <size>              characters per direction'
+	printf '%s\n' '    --auto              tries to make a square of the input file'
+	printf '\n'
+	printf '%b\n' '\e[1mdata\e[0m:                   defaults to path=/dev/urandom'
+	printf '%s\n' '    <path>              reads characters from file'
+	printf '%s\n' '    -                   reads from stdin'
+	printf '\n'
+	printf '%s\n' 'note that geometry takes precedence over data path if missing'
+	printf '\n'
+}
+
+if test "$1" = "--auto"; then
+	auto=true
+	shift
+elif test "$1" = "--help" || test "$1" = "-h"; then
+	help
+	exit
+elif test $# -eq 3; then
+	width="${1}"
+	height="${2}"
+	shift 2
+elif test $# -eq 2; then
+	width="${1}"
+	height="${2}"
+	shift 2
+elif test $# -eq 1; then
+	width="${1}"
+	height="${1}"
+	shift
+elif test $# -eq 0; then
+	width=8
+	height=8
+else
+	help
+	exit 1
+fi
+
+
+if test "$1" = -; then
+	set -- /dev/stdin
+fi
+file="${1:-/dev/urandom}"
+
+if [ "${auto}" = true ]; then
+	content=$(cat "$file" | sed '/^[[:space:]]*[^#].*$/s/[^{\\|]$/&;/' | sed '/^[[:space:]]*#.*/d' | tr -d '\n' | sed 's/\(\s\)\{1,\}/ /g')
+	length=$(printf "%s" "$content" | wc -c)
+	dim=$(printf "%.0f" "$(echo "sqrt($length)" | bc -l)")
+	width=$dim
+	height=$((dim + 1))  # just in case rounding errors
+	exec printf "%s" "$content" |
+		head -c "$((width * height))" |
+		dd cbs=$width conv=unblock 2>/dev/null
+
+else
+	exec < "${file}"
+	tr -dc '[:print:]' |
+		head -c "$((width * height))" |
+		dd cbs=$((width)) conv=unblock 2>/dev/null
+fi

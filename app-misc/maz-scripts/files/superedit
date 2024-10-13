@@ -1,0 +1,44 @@
+#!/bin/sh
+#
+# similar to sudoedit, but uses ESCALATE to use your root-gaining tool of choice
+#
+: "${EDITOR:=vi}"
+: "${ESCALATE:=doas}"
+
+error() {
+	printf '[error] %s\n' "$@"
+	exit 1
+}
+
+cleanup() {
+    rm -f "$TMP_FILE"
+    exit
+}
+trap cleanup INT TERM
+
+test $# -eq 1 || error "Usage: $0 <filename>"
+
+TARGET_FILE="${1}"
+TMP_FILE="/tmp/$(basename "$TARGET_FILE").$$"
+
+${ESCALATE} cp -T "${TARGET_FILE}" "${TMP_FILE}"
+
+phantomeditfile="${TARGET_FILE}.$$.edited"
+inotifywait -q -m -e modify "${TARGET_FILE}" | while read -r _; do
+    touch "${phantomeditfile}"
+done &
+
+${EDITOR} "${TMP_FILE}"
+test $? -eq 0 || error "editor returned non-zero. not saving"
+
+if test -e "${phantomeditfile}"; then
+	printf '[warning] %s\n' "${TARGET_FILE} was modified while you were editing. saving the remote file to ${TARGET_FILE}.$$"
+	${ESCALATE} cp -T "${TARGET_FILE}" "${TARGET_FILE}.$$"
+	rm "${phantomeditfile}"
+fi
+
+${ESCALATE} cp -T "${TMP_FILE}" "${TARGET_FILE}"
+cleanup
+
+#  vim: set sw=8 ts=8
+

@@ -1,0 +1,17 @@
+#compdef urlsh
+
+_arguments \
+	'--help[display usage information]' \
+	'--[end option parsing]' \
+	'-v[enable verbose mode]' \
+	'*:command:_urlsh_commands'
+
+_urlsh_commands() {
+	local cmds=()
+	local urls=(${=URLSH_PATH//:/ })
+	for url in $urls; do
+		cmds+=($(curl -s "https://${url}/Packages"))
+	done
+	_describe 'command' cmds
+}
+

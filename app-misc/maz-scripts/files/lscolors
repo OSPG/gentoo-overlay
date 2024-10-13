@@ -1,0 +1,45 @@
+#!/bin/zsh
+# do you forget the numbers used for different colours
+
+totsize=256
+colsize=16
+
+function complementary-color() {
+	local bg_color=$1
+	local r g b brightness
+
+	if (( bg_color < 16 )); then
+		r=$(( 255 * ( (bg_color >> 2) & 1) ))
+		g=$(( 255 * ( (bg_color >> 1) & 1) ))
+		b=$(( 255 * ( (bg_color >> 0) & 1) ))
+	elif (( bg_color < 232 )); then
+		local color=$((bg_color - 16))
+		r=$((color / 36 % 6 * 51))
+		g=$((color / 6 % 6 * 51))
+		b=$((color % 6 * 51))
+	else
+		local gray=$((bg_color - 232))
+		r=$((gray * 10 + 8))
+		g=$r
+		b=$r
+	fi
+
+	brightness=$(( (r * 299 + g * 587 + b * 114) / 1000 ))
+
+	if (( brightness > 128 )); then
+		echo 0
+	else
+		echo 15
+	fi
+}
+
+for i in $(seq 0 $(((totsize / colsize) - 1))); do
+	for j in $(seq ${colsize}); do
+		bg=$((colsize*i + j - 1))
+		echoti setab $((bg))
+		echoti setaf $(complementary-color $((bg)))
+		printf '%4s' $((bg))
+	done
+	printf '\n'
+done
+

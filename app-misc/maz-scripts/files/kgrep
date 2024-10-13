@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+set -- ${@#CONFIG_}
+set -- $(tr '[:lower:]' '[:upper:]' <<< "${@}")
+
+__tempargs=$@
+set --
+for v in $__tempargs; do
+	set -- "$@" -e "${v}"
+done
+unset __tempargs
+
+[ -n "$(command -v bat)" ] && {
+	exec zgrep -i "$@" /proc/config.gz |
+		bat --plain --color=always -l kconfig
+	exit
+}
+exec zgrep -i "$@" /proc/config.gz
+
