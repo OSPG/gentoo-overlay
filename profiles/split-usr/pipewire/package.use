@@ -1,5 +1,5 @@
 
-net-im/nheko voip
+net-im/nheko voip video
 
 # provides the v4l-ctl tool
 media-libs/libv4l utils
