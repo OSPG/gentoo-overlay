@@ -1,13 +1,9 @@
 # Copyright 2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-# This ebuild depens on the next overlays:
-# 	- guru 
-# 	- bombo82
-
 EAPI=8
 
-DESCRIPTION="stkw0 base configuration files"
+DESCRIPTION="extra configuration files for /etc/portage"
 
 SLOT="0"
 KEYWORDS="~amd64"
