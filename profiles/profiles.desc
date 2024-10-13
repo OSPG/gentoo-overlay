@@ -1,2 +1,7 @@
 amd64 hardened-plasma dev
 amd64 pipewire dev
+amd64 wayland dev
+amd64 merged-usr/pipewire dev
+amd64 merged-usr/wayland dev
+amd64 virtual/mazunki dev
+amd64 virtual/stkw0 dev
