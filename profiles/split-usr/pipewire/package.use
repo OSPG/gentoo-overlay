@@ -8,3 +8,5 @@ dev-qt/qtmultimedia gstreamer
 # provides the v4l-ctl tool
 media-libs/libv4l utils
 
+gui-wm/sway-meta pipewire screencast
+

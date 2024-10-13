@@ -5,3 +5,5 @@ dev-libs/qtkeychain keyring
 
 app-editors/emacs gtk
 
+gui-wm/sway-meta extra gtk
+
