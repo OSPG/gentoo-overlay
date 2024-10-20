@@ -23,6 +23,7 @@ dev-libs/poco
 dev-libs/spdlog
 dev-libs/libfmt
 net-libs/cppzmq
+dev-cpp/cpptrace
 
 # ECI
 sci-libs/cfg
