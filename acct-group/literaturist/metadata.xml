@@ -2,11 +2,7 @@
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>titanofold@gentoo.org</email>
-		<name>Aaron W. Swenson</name>
-	</maintainer>
-	<maintainer type="project">
-		<email>web-apps@gentoo.org</email>
-		<name>Gentoo Webapps</name>
+		<email>rolferen@gmail.com</email>
+		<name>Mazunki Hoksaas</name>
 	</maintainer>
 </pkgmetadata>
