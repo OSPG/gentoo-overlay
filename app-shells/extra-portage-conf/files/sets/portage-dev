@@ -1,0 +1,33 @@
+# basic portage management tools
+
+app-doc/eclass-manpages	# manpages for eclasses (section 5)
+app-eselect/eselect-repository	# repos.conf as eselect
+
+app-portage/cpuid2cpuflags	# to insert variable into make.conf
+app-portage/eix	# manages local portage-trees
+app-portage/gentoolkit	# all the e* tools for portage
+# app-portage/iwdevtools	# won't compile. aids fixing QA issues
+app-portage/pfl	# searches online package database
+app-portage/portage-utils	# all the q* tools for portage
+app-portage/pram	# helps manage pull requests for Gentoo policies
+
+app-shells/gentoo-zsh-completions	# completions for zsh
+app-shells/gentoo-bashcomp	# completions for bash
+
+app-text/wgetpaste	# pastebin preferred by Gentoo's IRC community
+
+app-vim/gentoo-syntax	# offers filetype=ebuild and more for vim
+
+# most of portage uses python, so it makes sense to
+# include python development tools here
+dev-python/black	# pep8-compliant code formatter for python
+dev-python/pytest	# runs tests
+
+dev-util/ebuildtester	# verifies your ebuilds in a standalone docker instance
+dev-util/pkgcheck	# scans for QA issues in ebuilds/commits
+dev-util/pkgdev	# git wrapper for ebuild repos
+
+dev-vcs/git	# if you're not using git for your repos you're silly
+
+# vim: vts=59 noexpandtab colorcolumn=60,119
+
