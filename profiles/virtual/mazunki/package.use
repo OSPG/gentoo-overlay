@@ -17,3 +17,6 @@ app-text/zathura-meta cb djvu pdf
 # required for non-png background images
 gui-apps/swaybg gdk-pixbuf
 
+# required to use postgresql on quasselcore server
+net-irc/quassel postgresql
+
