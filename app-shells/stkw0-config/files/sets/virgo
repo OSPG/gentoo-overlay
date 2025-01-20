@@ -12,6 +12,8 @@ dev-python/PyQt5-stubs
 dev-python/pyqt_tools
 dev-python/svgelements
 dev-python/guiqwt
+# python tools
+dev-python/twine
 
 # CDM
 dev-cpp/catch
