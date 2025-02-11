@@ -51,3 +51,20 @@ precmd() {
 function gr() {
    git -C "$1" rev-parse --show-toplevel
 }
+
+function commit_release () {
+	local changes=$(git diff-index --quiet HEAD)
+	if [ "$changes" -ne 0 ]; then
+		git stash || exit
+	fi
+
+	git checkout main || exit
+	git pull || exit
+	git tag "v${1}" || exit
+	git push --tags || exit
+	git checkout dev
+
+	if [ "$changes" -ne 0 ]; then
+		git stash pop || exit
+	fi
+}
