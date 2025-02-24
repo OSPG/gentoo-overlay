@@ -53,18 +53,19 @@ function gr() {
 }
 
 function commit_release () {
-	local changes=$(git diff-index --quiet HEAD)
+	git diff-index --quiet HEAD
+	local changes=$?
 	if [ "$changes" -ne 0 ]; then
-		git stash || exit
+		git stash || return
 	fi
 
-	git checkout main || exit
-	git pull || exit
-	git tag "v${1}" || exit
-	git push --tags || exit
+	git checkout main || return
+	git pull || return
+	git tag "v${1}" || return
+	git push --tags || return
 	git checkout dev
 
 	if [ "$changes" -ne 0 ]; then
-		git stash pop || exit
+		git stash pop || return
 	fi
 }

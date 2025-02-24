@@ -55,7 +55,9 @@ DEPEND="
 		dev-util/vulkan-tools
 		kde-apps/ark
 		kde-apps/dolphin
+		kde-apps/kompare
 		kde-apps/ffmpegthumbs
+		kde-apps/kdepim-addons
 		kde-misc/kdeconnect
 		kde-misc/kio-gdrive
 		kde-misc/plasma-pass
