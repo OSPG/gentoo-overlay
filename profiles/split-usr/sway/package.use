@@ -10,3 +10,6 @@ gui-wm/sway-meta extra gtk
 # required for audio/video file playback support
 media-plugins/gst-plugins-meta ffmpeg
 
+# required for *.rar files and bd:// files
+media-video/mpv archive bluray
+
