@@ -6,3 +6,4 @@ dev-util/ebuildtester
 dev-util/pkgcheck
 dev-util/pkgdev
 dev-util/pkgdiff
+dev-util/pkgcruft
