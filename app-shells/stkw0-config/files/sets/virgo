@@ -29,9 +29,9 @@ net-libs/cppzmq
 dev-cpp/cpptrace
 
 # ECI
-sci-libs/cfg
-sci-libs/cm
-sci-libs/fd
+#sci-libs/cfg
+#sci-libs/cm
+#sci-libs/fd
 
 # firmware
 dev-qt/qtserialport
