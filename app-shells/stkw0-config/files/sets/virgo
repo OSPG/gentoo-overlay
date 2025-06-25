@@ -14,6 +14,7 @@ dev-python/guiqwt
 # python tools
 dev-python/twine
 dev-python/pytest-cov
+dev-python/pytest-embedded
 
 # CDM
 dev-cpp/catch
@@ -36,3 +37,4 @@ dev-cpp/cpptrace
 # firmware
 dev-qt/qtserialport
 dev-embedded/esp-idf
+
