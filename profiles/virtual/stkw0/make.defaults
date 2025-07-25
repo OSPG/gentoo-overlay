@@ -1,4 +1,4 @@
-L10N="ca ca-ES es es-ES eo ja ja_JP"
+L10N="-* ca ca-ES es es-ES eo ja ja_JP"
 
 ACCEPT_LICENSE="*"
 ACCEPT_KEYWORDS="~amd64"
