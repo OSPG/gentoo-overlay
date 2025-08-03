@@ -5,4 +5,4 @@ ACCEPT_KEYWORDS="~amd64"
 
 USE="btrfs zsh-completion"
 
-RUBY_TARGETS="ruby33 ruby34"
+RUBY_TARGETS="-* ruby33 ruby34"
