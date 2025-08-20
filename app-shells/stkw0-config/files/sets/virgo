@@ -22,7 +22,6 @@ dev-cpp/cli11
 dev-cpp/magic_enum
 dev-cpp/tomlplusplus
 dev-cpp/nlohmann_json
-dev-db/influxdb
 dev-libs/poco
 dev-libs/spdlog
 dev-libs/libfmt
