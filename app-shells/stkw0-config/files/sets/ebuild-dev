@@ -2,6 +2,7 @@ app-admin/gentoo-retirement-scripts
 app-doc/eclass-manpages
 app-portage/iwdevtools
 app-portage/pram
+app-portage/pycargoebuild
 dev-util/ebuildtester
 dev-util/pkgcheck
 dev-util/pkgdev
