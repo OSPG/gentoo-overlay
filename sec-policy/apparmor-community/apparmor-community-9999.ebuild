@@ -14,8 +14,10 @@ LICENSE="Unlicense"
 SLOT="0"
 KEYWORDS=""
 
+BDEPEND="sys-apps/attr"
 
 src_install() {
 	insinto /etc/apparmor.d
-	doins -r profiles
+	doins -r profiles/*
+	find "${ED}/etc/apparmor.d/"* -type f -exec attr -s pkg-source -V ospg {} \; || die
 }
