@@ -3,6 +3,6 @@ L10N="-* ca ca-ES es es-ES eo ja ja_JP"
 ACCEPT_LICENSE="*"
 ACCEPT_KEYWORDS="~amd64"
 
-USE="btrfs pgo zsh-completion"
+USE="vaapi btrfs pgo zsh-completion"
 
 RUBY_TARGETS="-* ruby33 ruby34"
