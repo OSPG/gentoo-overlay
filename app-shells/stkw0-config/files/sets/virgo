@@ -15,6 +15,12 @@ dev-python/guiqwt
 dev-python/twine
 dev-python/pytest-cov
 dev-python/pytest-embedded
+#Calib anal
+dev-python/pytz
+dev-python/matplotlib
+dev-python/reportlab
+dev-python/svglib
+dev-python/pandas
 
 # CDM
 dev-cpp/catch
