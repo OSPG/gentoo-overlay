@@ -26,6 +26,7 @@ DEPEND="
 	app-portage/genlop
 	app-portage/gentoolkit
 	app-shells/atuin
+	dev-db/sqlite[-icu]
 	app-shells/extra-portage-conf
 	app-shells/zsh
 	app-shells/zsh-completions
@@ -102,6 +103,7 @@ DEPEND="
 			app-containers/docker-buildx
 			app-containers/docker-cli
 			dev-util/ccache
+			dev-util/codex
 			dev-util/cppcheck
 			dev-util/kdevelop
 			dev-util/pycharm-professional
@@ -174,6 +176,8 @@ pkg_config() {
 			su -c 'kwriteconfig6 --file kwinrc --group "Desktops" --key Name_7 "🕯"' $i || die
 			su -c 'kwriteconfig6 --file kwinrc --group "Desktops" --key Name_8 "🌏"' $i || die
 			su -c 'kwriteconfig6 --file kwinrc --group "Desktops" --key Name_9 "🗨"' $i || die
+			su -c 'kwriteconfig6 --file kglobalshortcutsrc --group services --group Alacritty.desktop --key New "Meta+Shift+Return"' $i || die
+			su -c 'kwriteconfig6 --file kcminputrc --group ButtonRebinds --group Mouse --key ExtraButton3 "Key,Ctrl+Alt+A"' $i || die
 		done
 		elog "Updating git"
 		for i in *; do
