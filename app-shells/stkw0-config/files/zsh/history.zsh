@@ -17,4 +17,4 @@ setopt HIST_REDUCE_BLANKS
 setopt HIST_VERIFY
 
 ATUIN_NOBIND="true"
-eval "$(atuin init zsh)"
+source /usr/share/atuin/shell-init/zsh
