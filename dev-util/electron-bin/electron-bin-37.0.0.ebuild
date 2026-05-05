@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -19,7 +19,7 @@ SRC_URI="
 "
 S="${WORKDIR}"
 
-CHROMIUM_VERSION="138" # Check the releases page; gets correct chromium-ffmpeg version.
+CHROMIUM_VERSION="148" # Check the releases page; gets correct chromium-ffmpeg version.
 
 # Electron is BSD, Node is already covered by chromium's licence; use the string from the appropriate chromium ebuild.
 # RAR is not conditional, however.
