@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>Kangie@gentoo.org</email>
+    <description>Primary maintainer</description>
+  </maintainer>
+  <maintainer type="project">
+    <email>chromium@gentoo.org</email>
+    <name>Gentoo Chromium Project</name>
+  </maintainer>
+  <longdescription>
+    Electron is a framework for building cross-platform desktop applications.
+    This package provides the Electron runtime, which is based on Chromium and Node.js.
+    It is not useful on its own (except for testing purposes), but packages that use Electron
+    can depend on it to provide the runtime environment instead of relying on a downloaded binary.
+  </longdescription>
+  <use>
+    <flag name="ffmpeg-chromium">With USE=proprietary-codecs, use <pkg>media-video/ffmpeg-chromium</pkg> for media playback instead of <pkg>media-video/ffmpeg</pkg></flag>
+    <flag name="proprietary-codecs">Enable codecs for patent-encumbered audio and video formats.</flag>
+  </use>
+</pkgmetadata>

@@ -1,0 +1,285 @@
+https://github.com/electron/electron/commit/041ada15867b4ed24193f2023747f275806bcf10, some changes removed to backport to 36.4.0
+From: Robo <hop2deep@gmail.com>
+Date: Fri, 7 Mar 2025 06:04:18 +0900
+Subject: [PATCH] build: match upstream with unsafe buffer paths (#45853)
+
+* build: match upstream with unsafe buffer paths
+
+* Don't assume STL iterators are pointers
+
+Refs https://issues.chromium.org/issues/328308661
+
+* chore: spanify process_singleton_win.cc
+
+---
+ patches/chromium/.patches                     |  1 +
+ ...d_data_parameter_to_processsingleton.patch | 45 ++++++-------------
+ ...e_wrap_iter_in_string_view_and_array.patch | 22 +++++++++
+ shell/browser/api/electron_api_app.cc         |  2 +-
+ .../electron_api_system_preferences_win.cc    |  2 +-
+ shell/browser/api/electron_api_web_request.cc |  2 +-
+ .../ui/views/client_frame_view_linux.cc       |  2 +-
+ shell/common/api/electron_api_url_loader.cc   |  4 +-
+ shell/common/gin_converters/std_converter.h   |  2 +-
+ shell/common/keyboard_util.cc                 |  2 +-
+ 10 files changed, 44 insertions(+), 40 deletions(-)
+ create mode 100644 patches/chromium/fix_enable_wrap_iter_in_string_view_and_array.patch
+
+diff --git a/patches/chromium/.patches b/patches/chromium/.patches
+index afe3cee..651c8b2 100644
+--- a/patches/chromium/.patches
++++ b/patches/chromium/.patches
+@@ -143,6 +143,7 @@ feat_add_signals_when_embedder_cleanup_callbacks_run_for.patch
+ feat_separate_content_settings_callback_for_sync_and_async_clipboard.patch
+ fix_win32_synchronous_spellcheck.patch
+ chore_remove_conflicting_allow_unsafe_libc_calls.patch
++fix_enable_wrap_iter_in_string_view_and_array.patch
+ fix_linter_error.patch
+ revert_enable_crel_for_arm32_targets.patch
+ mac_fix_check_on_ime_reconversion_due_to_invalid_replacement_range.patch
+diff --git a/patches/chromium/feat_add_data_parameter_to_processsingleton.patch b/patches/chromium/feat_add_data_parameter_to_processsingleton.patch
+index 4edd564..809332d 100644
+--- a/patches/chromium/feat_add_data_parameter_to_processsingleton.patch
++++ b/patches/chromium/feat_add_data_parameter_to_processsingleton.patch
+@@ -179,7 +179,7 @@ index 08cbe32a258bf478f1da0a07064d3e9ef14c44a5..b9f2a43cb90fac4b031a4b4da38d6435
+    if (!WriteToSocket(socket.fd(), to_send.data(), to_send.length())) {
+      // Try to kill the other process, because it might have been dead.
+ diff --git a/chrome/browser/process_singleton_win.cc b/chrome/browser/process_singleton_win.cc
+-index d91f58ebe3a024bc41ed72121c49172f68e0d862..255160d6bd6b2ea1cd640fde8f4b4ce598148418 100644
++index d91f58ebe3a024bc41ed72121c49172f68e0d862..7b85ba5ed8d0c2a152899ad65f275e6680a93dba 100644
+ --- a/chrome/browser/process_singleton_win.cc
+ +++ b/chrome/browser/process_singleton_win.cc
+ @@ -81,10 +81,12 @@ BOOL CALLBACK BrowserWindowEnumeration(HWND window, LPARAM param) {
+@@ -197,7 +197,7 @@ index d91f58ebe3a024bc41ed72121c49172f68e0d862..255160d6bd6b2ea1cd640fde8f4b4ce5
+    static const int min_message_size = 7;
+    if (cds->cbData < min_message_size * sizeof(wchar_t) ||
+        cds->cbData % sizeof(wchar_t) != 0) {
+-@@ -134,6 +136,37 @@ bool ParseCommandLine(const COPYDATASTRUCT* cds,
++@@ -134,6 +136,23 @@ bool ParseCommandLine(const COPYDATASTRUCT* cds,
+      const std::wstring cmd_line =
+          msg.substr(second_null + 1, third_null - second_null);
+      *parsed_command_line = base::CommandLine::FromString(cmd_line);
+@@ -210,32 +210,18 @@ index d91f58ebe3a024bc41ed72121c49172f68e0d862..255160d6bd6b2ea1cd640fde8f4b4ce5
+ +      return true;
+ +    }
+ +
+-+    // Get length of the additional data.
+-+    const std::wstring additional_data_length_string =
+-+        msg.substr(third_null + 1, fourth_null - third_null);
+-+    size_t additional_data_length;
+-+    base::StringToSizeT(additional_data_length_string, &additional_data_length);
+-+
+-+    const std::wstring::size_type fifth_null =
+-+        msg.find_first_of(L'\0', fourth_null + 1);
+-+    if (fifth_null == std::wstring::npos ||
+-+        fifth_null == msg.length()) {
+-+      LOG(WARNING) << "Invalid format for start command, we need a string in 6 "
+-+        "parts separated by NULLs";
+-+    }
+-+
+ +    // Get the actual additional data.
+ +    const std::wstring additional_data =
+-+        msg.substr(fourth_null + 1, fifth_null - fourth_null);
+-+    const uint8_t* additional_data_bytes =
+-+        reinterpret_cast<const uint8_t*>(additional_data.c_str());
+-+    *parsed_additional_data = std::vector<uint8_t>(additional_data_bytes,
+-+        additional_data_bytes + additional_data_length);
+++        msg.substr(third_null + 1, fourth_null - third_null);
+++    base::span<const uint8_t> additional_data_bytes =
+++        base::as_byte_span(additional_data);
+++    *parsed_additional_data = std::vector<uint8_t>(
+++        additional_data_bytes.begin(), additional_data_bytes.end());
+ +
+      return true;
+    }
+    return false;
+-@@ -155,13 +188,14 @@ bool ProcessLaunchNotification(
++@@ -155,13 +174,14 @@ bool ProcessLaunchNotification(
+  
+    base::CommandLine parsed_command_line(base::CommandLine::NO_PROGRAM);
+    base::FilePath current_directory;
+@@ -253,7 +239,7 @@ index d91f58ebe3a024bc41ed72121c49172f68e0d862..255160d6bd6b2ea1cd640fde8f4b4ce5
+    return true;
+  }
+  
+-@@ -265,9 +299,11 @@ bool ProcessSingleton::EscapeVirtualization(
++@@ -265,9 +285,11 @@ bool ProcessSingleton::EscapeVirtualization(
+  ProcessSingleton::ProcessSingleton(
+      const std::string& program_name,
+      const base::FilePath& user_data_dir,
+@@ -265,7 +251,7 @@ index d91f58ebe3a024bc41ed72121c49172f68e0d862..255160d6bd6b2ea1cd640fde8f4b4ce5
+        program_name_(program_name),
+        is_app_sandboxed_(is_app_sandboxed),
+        is_virtualized_(false),
+-@@ -294,7 +330,7 @@ ProcessSingleton::NotifyResult ProcessSingleton::NotifyOtherProcess() {
++@@ -294,7 +316,7 @@ ProcessSingleton::NotifyResult ProcessSingleton::NotifyOtherProcess() {
+      return PROCESS_NONE;
+    }
+  
+@@ -275,7 +261,7 @@ index d91f58ebe3a024bc41ed72121c49172f68e0d862..255160d6bd6b2ea1cd640fde8f4b4ce5
+        return PROCESS_NOTIFIED;
+      case NotifyChromeResult::NOTIFY_FAILED:
+ diff --git a/chrome/browser/win/chrome_process_finder.cc b/chrome/browser/win/chrome_process_finder.cc
+-index 019ac7e93e009a713ce56ee8bcacf467b4fe769d..9417403bb9cacd0572b37493ab2d98130313db4d 100644
++index 019ac7e93e009a713ce56ee8bcacf467b4fe769d..283693966c041340983aa78a95f8a274db601fb4 100644
+ --- a/chrome/browser/win/chrome_process_finder.cc
+ +++ b/chrome/browser/win/chrome_process_finder.cc
+ @@ -39,7 +39,9 @@ HWND FindRunningChromeWindow(const base::FilePath& user_data_dir) {
+@@ -289,13 +275,13 @@ index 019ac7e93e009a713ce56ee8bcacf467b4fe769d..9417403bb9cacd0572b37493ab2d9813
+    TRACE_EVENT0("startup", "AttemptToNotifyRunningChrome");
+  
+    DCHECK(remote_window);
+-@@ -68,12 +70,29 @@ NotifyChromeResult AttemptToNotifyRunningChrome(HWND remote_window) {
++@@ -68,12 +70,24 @@ NotifyChromeResult AttemptToNotifyRunningChrome(HWND remote_window) {
+      new_command_line.AppendSwitchNative(switches::kSourceShortcut, si.lpTitle);
+  
+    // Send the command line to the remote chrome window.
+ -  // Format is "START\0<<<current directory>>>\0<<<commandline>>>".
+ +  // Format is
+-+  // "START\0<current-directory>\0<command-line>\0<additional-data-length>\0<additional-data>".
+++  // "START\0<current-directory>\0<command-line>\0<additional-data>".
+    std::wstring to_send = base::StrCat(
+        {std::wstring_view{L"START\0", 6}, cur_dir.value(),
+         std::wstring_view{L"\0", 1}, new_command_line.GetCommandLineString(),
+@@ -303,11 +289,6 @@ index 019ac7e93e009a713ce56ee8bcacf467b4fe769d..9417403bb9cacd0572b37493ab2d9813
+  
+ +  size_t additional_data_size = additional_data.size_bytes();
+ +  if (additional_data_size) {
+-+    // Send over the size, because the reinterpret cast to wchar_t could
+-+    // add padding.
+-+    to_send.append(base::UTF8ToWide(base::NumberToString(additional_data_size)));
+-+    to_send.append(L"\0", 1);  // Null separator.
+-+
+ +    size_t padded_size = additional_data_size / sizeof(wchar_t);
+ +    if (additional_data_size % sizeof(wchar_t) != 0) {
+ +      padded_size++;
+diff --git a/patches/chromium/fix_enable_wrap_iter_in_string_view_and_array.patch b/patches/chromium/fix_enable_wrap_iter_in_string_view_and_array.patch
+new file mode 100644
+index 0000000..2c8066b
+--- /dev/null
++++ b/patches/chromium/fix_enable_wrap_iter_in_string_view_and_array.patch
+@@ -0,0 +1,22 @@
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
++From: deepak1556 <hop2deep@gmail.com>
++Date: Sat, 1 Mar 2025 05:11:41 +0900
++Subject: fix: enable __wrap_iter in string_view and array
++
++Refs https://github.com/electron/electron/issues/45810#issuecomment-2691417213
++
++Patch can be removed when build_make_libcxx_abi_unstable_false_for_electron.patch is removed.
++
++diff --git a/buildtools/third_party/libc++/__config_site b/buildtools/third_party/libc++/__config_site
++index e240ff6fff94a6cebf8662996712fe7eb22e5fff..ddf1693002aa171b3d91aa4ef08f5b360e4adddc 100644
++--- a/buildtools/third_party/libc++/__config_site
+++++ b/buildtools/third_party/libc++/__config_site
++@@ -19,6 +19,8 @@
++ #define _LIBCPP_ABI_NAMESPACE __Cr
++ 
++ #define _LIBCPP_ABI_VERSION 1
+++#define _LIBCPP_ABI_USE_WRAP_ITER_IN_STD_ARRAY
+++#define _LIBCPP_ABI_USE_WRAP_ITER_IN_STD_STRING_VIEW
++ 
++ #define _LIBCPP_ABI_FORCE_ITANIUM 0
++ #define _LIBCPP_ABI_FORCE_MICROSOFT 0
+diff --git a/shell/browser/api/electron_api_app.cc b/shell/browser/api/electron_api_app.cc
+index b394fb0..0bef675 100644
+--- a/shell/browser/api/electron_api_app.cc
++++ b/shell/browser/api/electron_api_app.cc
+@@ -408,7 +408,7 @@ int GetPathConstant(std::string_view name) {
+       {"videos", chrome::DIR_USER_VIDEOS},
+   });
+   // clang-format on
+-  const auto* iter = Lookup.find(name);
++  auto iter = Lookup.find(name);
+   return iter != Lookup.end() ? iter->second : -1;
+ }
+ 
+diff --git a/shell/browser/api/electron_api_system_preferences_win.cc b/shell/browser/api/electron_api_system_preferences_win.cc
+index 5c60ef4..40454bb 100644
+--- a/shell/browser/api/electron_api_system_preferences_win.cc
++++ b/shell/browser/api/electron_api_system_preferences_win.cc
+@@ -129,7 +129,7 @@ std::string SystemPreferences::GetColor(gin_helper::ErrorThrower thrower,
+       {"window-text", COLOR_WINDOWTEXT},
+   });
+ 
+-  if (const auto* iter = Lookup.find(color); iter != Lookup.end())
++  if (auto iter = Lookup.find(color); iter != Lookup.end())
+     return ToRGBAHex(color_utils::GetSysSkColor(iter->second));
+ 
+   thrower.ThrowError("Unknown color: " + color);
+diff --git a/shell/browser/api/electron_api_web_request.cc b/shell/browser/api/electron_api_web_request.cc
+index c091e91..d2e58f9 100644
+--- a/shell/browser/api/electron_api_web_request.cc
++++ b/shell/browser/api/electron_api_web_request.cc
+@@ -80,7 +80,7 @@ struct UserData : public base::SupportsUserData::Data {
+ };
+ 
+ extensions::WebRequestResourceType ParseResourceType(std::string_view value) {
+-  if (const auto* iter = ResourceTypes.find(value); iter != ResourceTypes.end())
++  if (auto iter = ResourceTypes.find(value); iter != ResourceTypes.end())
+     return iter->second;
+ 
+   return extensions::WebRequestResourceType::OTHER;
+diff --git a/shell/browser/ui/views/client_frame_view_linux.cc b/shell/browser/ui/views/client_frame_view_linux.cc
+index 5ec4848..3167524 100644
+--- a/shell/browser/ui/views/client_frame_view_linux.cc
++++ b/shell/browser/ui/views/client_frame_view_linux.cc
+@@ -416,7 +416,7 @@ void ClientFrameViewLinux::LayoutButtonsOnSide(
+   }
+ 
+   for (views::FrameButton frame_button : frame_buttons) {
+-    auto* button =
++    auto button =
+         std::ranges::find_if(nav_buttons_, [&](const NavButton& test) {
+           return test.type != skip_type && test.frame_button == frame_button;
+         });
+diff --git a/shell/common/api/electron_api_url_loader.cc b/shell/common/api/electron_api_url_loader.cc
+index be953ab..0a4c4c0 100644
+--- a/shell/common/api/electron_api_url_loader.cc
++++ b/shell/common/api/electron_api_url_loader.cc
+@@ -568,7 +568,7 @@ gin::Handle<SimpleURLLoaderWrapper> SimpleURLLoaderWrapper::Create(
+             {"no-cors", Val::kNoCors},
+             {"same-origin", Val::kSameOrigin},
+         });
+-    if (auto* iter = Lookup.find(mode); iter != Lookup.end())
++    if (auto iter = Lookup.find(mode); iter != Lookup.end())
+       request->mode = iter->second;
+   }
+ 
+@@ -597,7 +597,7 @@ gin::Handle<SimpleURLLoaderWrapper> SimpleURLLoaderWrapper::Create(
+             {"worker", Val::kWorker},
+             {"xslt", Val::kXslt},
+         });
+-    if (auto* iter = Lookup.find(destination); iter != Lookup.end())
++    if (auto iter = Lookup.find(destination); iter != Lookup.end())
+       request->destination = iter->second;
+   }
+ 
+diff --git a/shell/common/gin_converters/std_converter.h b/shell/common/gin_converters/std_converter.h
+index 0870434..8f80835 100644
+--- a/shell/common/gin_converters/std_converter.h
++++ b/shell/common/gin_converters/std_converter.h
+@@ -253,7 +253,7 @@ bool FromV8WithLookup(v8::Isolate* isolate,
+   if (key_transform)
+     key_transform(key);
+ 
+-  if (const auto* iter = table.find(key); iter != table.end()) {
++  if (auto iter = table.find(key); iter != table.end()) {
+     *out = iter->second;
+     return true;
+   }
+diff --git a/shell/common/keyboard_util.cc b/shell/common/keyboard_util.cc
+index a8a2903..a358995 100644
+--- a/shell/common/keyboard_util.cc
++++ b/shell/common/keyboard_util.cc
+@@ -108,7 +108,7 @@ CodeAndShiftedChar KeyboardCodeFromKeyIdentifier(const std::string_view str) {
+           {"volumeup", {ui::VKEY_VOLUME_UP, {}}},
+       });
+ 
+-  if (auto* const iter = Lookup.find(str); iter != Lookup.end())
++  if (auto iter = Lookup.find(str); iter != Lookup.end())
+     return iter->second;
+ 
+   return {ui::VKEY_UNKNOWN, {}};
+-- 
+2.49.0

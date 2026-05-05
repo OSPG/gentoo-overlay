@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>Kangie@gentoo.org</email>
+    <description>Primary maintainer</description>
+  </maintainer>
+  <maintainer type="project">
+    <email>chromium@gentoo.org</email>
+    <name>Gentoo Chromium Project</name>
+  </maintainer>
+  <longdescription>
+    Electron is a framework for building cross-platform desktop applications.
+    This package provides the Electron runtime, which is based on Chromium and Node.js.
+    It is not useful on its own (except for testing purposes), but packages that use Electron
+    can depend on it to provide the runtime environment instead of relying on a downloaded binary.
+  </longdescription>
+  <use>
+    <flag name="debug">Enable DCHECK feature with severity configurable at runtime. Mostly intended for debugging and development, NOT RECOMMENDED for general use.</flag>
+    <flag name="dev-dependencies">Install development dependencies (i.e. node_modules) alongside the runtime.</flag>
+    <flag name="ffmpeg-chromium">(binpkg only) Use Chromium FFmpeg fork (<pkg>media-video/ffmpeg-chromium</pkg>) rather than mainline FFmpeg (<pkg>media-video/ffmpeg</pkg>)</flag>
+    <flag name="gtk4">Build with GTK4 headers.</flag>
+    <flag name="hangouts">Enable support for Google Hangouts features such as screen sharing</flag>
+    <flag name="headless">Build Ozone only with headless backend, NOT RECOMMENDED for general use.</flag>
+    <flag name="official">Enable Official build instead of Developer build.</flag>
+    <flag name="pax-kernel">Allow building on a PaX-enabled kernel</flag>
+    <flag name="pgo">Build with Profile Guided Optimizations (2-stage compilation)</flag>
+    <flag name="proprietary-codecs">Enable codecs for patent-encumbered audio and video formats.</flag>
+    <flag name="rar">Enable the Safe Browsing feature to inspect RAR files.</flag>
+    <flag name="system-harfbuzz">Use system <pkg>media-libs/harfbuzz</pkg> instead of the bundled library.</flag>
+    <flag name="system-icu">Use system <pkg>dev-libs/icu</pkg> instead of the bundled one</flag>
+    <flag name="system-png">Use system <pkg>media-libs/libpng</pkg> instead of the bundled library</flag>
+    <flag name="system-zstd">Use system <pkg>app-arch/zstd</pkg> instead of the bundled one.</flag>
+    <flag name="widevine">Unsupported closed-source DRM capability (required by Netflix VOD)</flag>
+  </use>
+</pkgmetadata>
