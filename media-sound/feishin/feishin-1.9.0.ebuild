@@ -17,7 +17,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="media-video/mpv"
-BDEPEND="dev-util/pnpm-bin"
+BDEPEND="dev-util/pnpm"
 
 src_unpack() {
 	default
