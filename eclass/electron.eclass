@@ -38,6 +38,7 @@ _ELECTRON_ECLASS=1
 # @DESCRIPTION:
 # Array of Eclass-accepted Electron slots, newest first.
 declare -a -g -r _ELECTRON_SLOTS=(
+	42
 	37
 	36
 )
