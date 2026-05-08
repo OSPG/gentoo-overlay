@@ -39,8 +39,8 @@ _ELECTRON_ECLASS=1
 # Array of Eclass-accepted Electron slots, newest first.
 declare -a -g -r _ELECTRON_SLOTS=(
 	42
+	38
 	37
-	36
 )
 
 # Strictly speaking we should be using the electron ABI to slot, but the major version
