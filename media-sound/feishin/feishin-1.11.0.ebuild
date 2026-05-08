@@ -4,7 +4,7 @@
 EAPI=8
 
 ELECTRON_MIN_VER=37
-ELECTRON_MAX_VER=42
+ELECTRON_MAX_VER=38
 
 inherit desktop edo electron wrapper xdg
 
