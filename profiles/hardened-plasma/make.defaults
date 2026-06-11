@@ -3,7 +3,7 @@ USE="apparmor caps lto cjk verify-sig ${SYSTEM_USE} -ppp"
 
 FEATURES="parallel-fetch parallel-install nodoc noinfo"
 
-COMMON_FLAGS="-O3 -march=native -mtune=native -w --param ggc-min-expand=40 --param ggc-min-heapsize=2097152 \
+COMMON_FLAGS="-O3 -march=native -mtune=native -w \
 	-flto=auto -Werror=odr -Werror=lto-type-mismatch -Werror=strict-aliasing -fipa-pta \
 	-fdevirtualize-at-ltrans -fno-plt"
 
