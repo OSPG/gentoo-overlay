@@ -1,0 +1,13 @@
+See https://git.ligo.org/virgo/virgoapp/Fd/-/merge_requests/6
+---
+diff --git i/src/meson.build w/src/meson.build
+index e8d2123..f18bb05 100644
+--- i/src/meson.build
++++ w/src/meson.build
+@@ -62,5 +62,6 @@ foreach app: ['FFLMoni', 'FdGetChannelsList', 'FdGetFramesInMemory', 'FdIOServer
+ 	executable (app, app + '.c',
+ 		    link_with: fd_library,
+ 		    dependencies: [fd_dependencies, libm,librt],
++		    c_args: ['-std=c17'],
+ 		    install: true)
+ endforeach
