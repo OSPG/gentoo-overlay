@@ -1,3 +1,4 @@
+net-misc/thinlinc
 dev-libs/ifae-libs
 dev-libs/ttilanpp
 
@@ -22,17 +23,17 @@ dev-python/reportlab
 dev-python/svglib
 dev-python/pandas
 
-# CDM
-dev-cpp/catch
-dev-cpp/cli11
-dev-cpp/magic_enum
-dev-cpp/tomlplusplus
-dev-cpp/nlohmann_json
-dev-libs/poco
-dev-libs/spdlog
-dev-libs/libfmt
-net-libs/cppzmq
-dev-cpp/cpptrace
+# CDM (currently using nix)
+#dev-cpp/catch
+#dev-cpp/cli11
+#dev-cpp/magic_enum
+#dev-cpp/tomlplusplus
+#dev-cpp/nlohmann_json
+#dev-libs/poco
+#dev-libs/spdlog
+#dev-libs/libfmt
+#net-libs/cppzmq
+#dev-cpp/cpptrace
 
 # ECI
 #sci-libs/cfg
