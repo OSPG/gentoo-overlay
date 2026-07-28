@@ -31,7 +31,7 @@ src_prepare() {
 }
 
 src_compile() {
-	edo pnpm build
+	edo env PNPM_CONFIG_VERIFY_DEPS_BEFORE_RUN=false pnpm build
 	find -type f -name "*.map" -delete || die
 	edo ./node_modules/.bin/electron-builder --config "${ELECTRON_BUILDER_CONFIG}" \
 		-c.electronDist="${ELECTRON_DIR}" \
