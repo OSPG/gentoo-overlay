@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <longdescription>
+    Anytype is an encrypted, local-first workspace for notes, objects,
+    databases, and collaboration. The desktop client is built from source and
+    uses the middleware version pinned by upstream.
+  </longdescription>
+  <upstream>
+    <remote-id type="github">anyproto/anytype-ts</remote-id>
+  </upstream>
+</pkgmetadata>
