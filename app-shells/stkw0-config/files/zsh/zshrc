@@ -6,6 +6,8 @@
 
 . ~/.keychain/${HOST}-sh 2> /dev/null
 
+export GPG_TTY=$(tty) # so git can ask for a password when using git commit --sign
+
 color_prompt=yes
 
 unsetopt menu_complete   # do not autoselect the first completion entry

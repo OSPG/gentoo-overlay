@@ -3,7 +3,7 @@
 
 # This ebuild depens on the next overlays:
 # 	- guru 
-# 	- bombo82
+# 	- nix-guix
 
 EAPI=8
 
@@ -37,6 +37,7 @@ DEPEND="
 	net-misc/keychain
 	net-vpn/tailscale
 	sec-policy/apparmor-profiles
+	sec-policy/apparmor-community
 	sys-apps/apparmor
 	sys-apps/apparmor-utils
 	sys-apps/bat
@@ -72,10 +73,11 @@ DEPEND="
 		kde-misc/plasma-pass
 		kde-plasma/plasma-meta
 		mail-client/thunderbird
+		media-fonts/twemoji
 		media-gfx/feh
 		media-video/mpv
 		net-dns/avahi
-		net-dns/bind-tools
+		net-dns/bind
 		net-dns/dnscrypt-proxy
 		net-news/rssguard
 		net-irc/quassel[-server]
@@ -114,6 +116,7 @@ DEPEND="
 			net-im/slack
 			net-misc/remmina[vnc]
 			sci-electronics/logic-bin
+			sys-apps/nix
 			sys-auth/nss-mdns
 		)
 	)
@@ -160,6 +163,9 @@ pkg_config() {
 		rc-update add avahi-daemon default
 		rc-service avahi-daemon start
 		# For the client-side eddit /etc/nsswitch.conf 
+		
+		rc-update add nix-daemon default
+		rc-service nix-daemon start
 	fi
 
 	if use stkw0-desktop; then
