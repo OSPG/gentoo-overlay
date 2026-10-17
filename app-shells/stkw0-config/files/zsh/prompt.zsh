@@ -35,8 +35,8 @@ fi
 
 RPROMPT="${current_dir} ${git_info} ${NIX_PROMPT} ${return_code}"
 if [ "$EUID" = "0" ] || [ "$USER" = "root" ] ; then
-	PROMPT=$'\n$(zcock)'" ${SSH} %{$fg_bold[black]%}@%M%{$reset_color%} %(1j.[%j] .)%{$fg_bold[yellow]%}❱%{$reset_color%} "
+	PROMPT=$'\n$(zclock)'" ${SSH} %{$fg_bold[black]%}@%M%{$reset_color%} %(1j.[%j] .)%{$fg_bold[yellow]%}❱%{$reset_color%} "
 else
-	PROMPT=$'\n$(zcock)'" ${SSH} %{$fg_bold[black]%}@%M%{$reset_color%} %(1j.[%j] .)%{$fg_bold[blue]%}❱%{$reset_color%} "
+	PROMPT=$'\n$(zclock)'" ${SSH} %{$fg_bold[black]%}@%M%{$reset_color%} %(1j.[%j] .)%{$fg_bold[blue]%}❱%{$reset_color%} "
 fi
 
