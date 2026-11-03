@@ -18,7 +18,7 @@ DEPEND="
 	app-text/djvu
 	app-text/poppler
 	media-gfx/graphicsmagick
-	nls? ( virtual/libntl )
+	nls? ( virtual/libintl )
 "
 RDEPEND="${DEPEND}"
 BDEPEND=""
