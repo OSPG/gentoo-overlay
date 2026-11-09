@@ -11,4 +11,4 @@ PORTAGE_NICENESS=17
 # we need -flexiblas as a workaround for numpy sigsev
 USE="btrfs djvu lm-sensors vaapi pgo zsh-completion -flexiblas"
 
-RUBY_TARGETS="-* ruby34 ruby40"
+RUBY_TARGETS="-* ruby40"
