@@ -20,12 +20,13 @@ DEPEND="
 	app-admin/needrestart
 	app-editors/vim
 	app-misc/godedupe
-	app-misc/zcock
+	app-misc/zclock
 	app-portage/eix
 	app-portage/pfl
 	app-portage/genlop
 	app-portage/gentoolkit
 	app-shells/atuin
+	app-shells/gentoo-zsh-completions
 	dev-db/sqlite[-icu]
 	app-shells/extra-portage-conf
 	app-shells/zsh
