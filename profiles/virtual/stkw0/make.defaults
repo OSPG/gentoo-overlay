@@ -9,6 +9,6 @@ PORTAGE_SCHEDULING_POLICY=batch
 PORTAGE_NICENESS=17
 
 # we need -flexiblas as a workaround for numpy sigsev
-USE="btrfs lm-sensors vaapi pgo zsh-completion -flexiblas"
+USE="btrfs djvu lm-sensors vaapi pgo zsh-completion -flexiblas"
 
 RUBY_TARGETS="-* ruby34 ruby40"
