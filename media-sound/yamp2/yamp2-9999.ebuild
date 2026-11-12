@@ -19,6 +19,25 @@ fi
 LICENSE="Unlicense"
 SLOT="0"
 
-DEPEND=""
-RDEPEND="${DEPEND}"
-BDEPEND=""
+DEPEND="
+	>=dev-libs/qtkeychain-0.17:=
+	dev-libs/re2:=
+	>=dev-libs/spdlog-1.12:=
+	dev-libs/wayland
+	>=dev-qt/qtbase-6.10:6[concurrent,dbus,gui,network,opengl,sql,sqlite,ssl,widgets]
+	>=dev-qt/qtmultimedia-6.10:6[ffmpeg]
+	>=dev-qt/qtsvg-6.10:6
+	>=dev-qt/qtwebengine-6.10:6[widgets]
+	kde-frameworks/kidletime:6
+	>=media-libs/taglib-2.0:=
+	>=media-video/mpv-0.35[libmpv]
+	net-libs/libpsl
+"
+RDEPEND="${DEPEND}
+	media-video/ffmpeg
+	net-misc/yt-dlp[deno]
+"
+BDEPEND="
+	dev-util/wayland-scanner
+	virtual/pkgconfig
+"
